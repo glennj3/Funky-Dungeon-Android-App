@@ -1,7 +1,10 @@
 package github.com.triplefrequency.funkydungeon.ui
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.ui.characterlist.CharacterRecyclerViewAdapter
@@ -11,10 +14,21 @@ class MainActivity : AppCompatActivity() {
 
     private var sideBySide = false
 
+    internal lateinit var toTheDice : FloatingActionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_list)
+        toTheDice = findViewById(R.id.toTheDice)
+        toTheDice.setOnClickListener {
+            val config = resources.configuration
 
+            val fragmentManager = fragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val twodice_fragment = TwoDice_Fragment()
+            fragmentTransaction.replace(android.R.id.content, twodice_fragment)
+            fragmentTransaction.commit()
+        }
         setSupportActionBar(toolbar)
 
         if (!charactersLoaded) {
