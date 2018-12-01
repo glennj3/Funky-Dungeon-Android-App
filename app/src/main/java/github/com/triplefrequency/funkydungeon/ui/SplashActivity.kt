@@ -1,14 +1,11 @@
-package github.com.triplefrequency.funkydungeon
+package github.com.triplefrequency.funkydungeon.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import github.com.triplefrequency.funkydungeon.ui.MainActivity
+import github.com.triplefrequency.funkydungeon.R
 
 
-import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
