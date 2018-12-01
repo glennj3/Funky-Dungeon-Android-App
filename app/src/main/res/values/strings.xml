@@ -3,4 +3,5 @@
     <string name="creatorActivityName">Character Creator</string>
     <string name="diceRoll_text">Shake phone to roll dice</string>
     <string name="roll_dice_button">Roll Dice</string>
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>
