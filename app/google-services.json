@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "636648576055",
+    "firebase_url": "https://funky-dungeon.firebaseio.com",
+    "project_id": "funky-dungeon",
+    "storage_bucket": "funky-dungeon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636648576055:android:e4cc7793a1ba3fb5",
+        "android_client_info": {
+          "package_name": "github.com.triplefrequency.funkydungeon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "636648576055-d1ahfhg7kjn8dn4ldu55uofsc93udqsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwyDA3I3TJCJouTCOTMYgWavvNPhRZMW8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
