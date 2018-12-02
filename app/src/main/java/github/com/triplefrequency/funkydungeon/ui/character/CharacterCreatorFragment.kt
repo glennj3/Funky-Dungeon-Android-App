@@ -9,6 +9,7 @@ import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_character_list.*
+import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
 
 class CharacterCreatorFragment : Fragment() {
     private var item: Character? = null
@@ -32,9 +33,5 @@ class CharacterCreatorFragment : Fragment() {
         }
 
         return rootView
-    }
-
-    companion object {
-        const val ARG_CHARACTER_ID = "character_id"
     }
 }

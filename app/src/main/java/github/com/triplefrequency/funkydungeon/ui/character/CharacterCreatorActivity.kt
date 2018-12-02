@@ -7,6 +7,7 @@ import android.view.MenuItem
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_character_creator.*
+import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
 
 class CharacterCreatorActivity : AppCompatActivity() {
 
@@ -22,8 +23,8 @@ class CharacterCreatorActivity : AppCompatActivity() {
             val fragment = CharacterCreatorFragment().apply {
                 arguments = Bundle().apply {
                     putString(
-                        CharacterCreatorFragment.ARG_CHARACTER_ID,
-                        intent.getStringExtra(CharacterCreatorFragment.ARG_CHARACTER_ID)
+                        ARG_CHARACTER_ID,
+                        intent.getStringExtra(ARG_CHARACTER_ID)
                     )
                 }
             }
