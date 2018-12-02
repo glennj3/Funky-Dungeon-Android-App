@@ -5,4 +5,8 @@
     <string name="roll_dice_button">Roll Dice</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="edit_default">default</string>
+    <string name="overview_tab_label">Overview</string>
+    <string name="attributes_tab_label">Attribute</string>
+    <string name="skills_tab_label">Skills</string>
+    <string name="attacks_tab_label">Attacks</string>
 </resources>
