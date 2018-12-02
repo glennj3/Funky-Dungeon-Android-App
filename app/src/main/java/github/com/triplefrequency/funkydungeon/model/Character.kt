@@ -8,7 +8,7 @@ import github.com.triplefrequency.funkydungeon.repository.saveDelegate
 import java.util.*
 
 class Character {
-    var id: String by saveDelegate(UUID.randomUUID().toString())
+    val id: String by saveDelegate(UUID.randomUUID().toString())
     var name: String by saveDelegate("")
 
     var defensePoints: Int by saveDelegate(10)
