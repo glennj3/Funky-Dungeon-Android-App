@@ -8,22 +8,12 @@ import kotlinx.coroutines.*
 
 object CharacterRepository {
     /**
-     * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
+     * Get all characters for the locally signed-in [FirebaseUser]
      */
-    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): Map<String, Character> {
-        return mapOf("test" to Character().apply {
-            name = "Test Name"
-            race = "Test Race"
-            cClass = "Test Class"
-        }, "otherTest" to Character().apply {
-            name = "Other Test Name"
-            race = "Test Race"
-            cClass = "Test Class"
-        })
-    }
-
     val characters: Map<String, Character>
         get() = characters()
+
+    private val characterLoader = CharacterLoader()
 
     /**
      * The actual character saver, with a blocking API that is called from a non-blocking context
@@ -38,6 +28,22 @@ object CharacterRepository {
      * All active save jobs, indexed by [Character.id]
      */
     private var saveJobs: MutableMap<String, Deferred<Unit>> = mutableMapOf()
+
+    /**
+     * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
+     */
+    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): Map<String, Character> {
+        return mapOf("test" to Character().apply {
+            name = "Test Name"
+            race = "Test Race"
+            cClass = "Test Class"
+        }, "otherTest" to Character().apply {
+            name = "Other Test Name"
+            race = "Test Race"
+            cClass = "Test Class"
+        })
+        // characterLoader.load(user)
+    }
 
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
