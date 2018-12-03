@@ -24,10 +24,11 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
     private LayoutInflater mInflater;
     private final Map<String, Integer> mAttrMap;
     private final Object[]  attrStrings;
-    //private Character character;
+    private Character character;
 
-    public AttributeListAdapter(Context context, Map attrMap) {
+    public AttributeListAdapter(Context context, Map attrMap, Character charac) {
         mInflater = LayoutInflater.from(context);
+        character = charac;
         this.mAttrMap = attrMap;
         attrStrings = attrMap.keySet().toArray();
     }
@@ -72,6 +73,8 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
             int value = mAttrMap.get(key);
             Bundle bundle = new Bundle();
             bundle.putInt("Attribute",value);
+            String id = character.getId();
+            bundle.putString("id", id);
 
             //Create fragment and add bundle
             AppCompatActivity activity = (AppCompatActivity) v.getContext();

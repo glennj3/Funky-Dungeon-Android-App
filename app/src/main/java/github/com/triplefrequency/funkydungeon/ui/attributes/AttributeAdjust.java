@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
+import github.com.triplefrequency.funkydungeon.model.Character;
+import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
 
 public class AttributeAdjust extends Fragment {
 
@@ -16,6 +18,7 @@ public class AttributeAdjust extends Fragment {
     private Button decButton;
     private TextView attrLevel;
     private int attrInt;
+    private Character character;
 
     public AttributeAdjust() {
     }
@@ -34,10 +37,12 @@ public class AttributeAdjust extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         attrInt = getArguments().getInt("Attribute");
-        /**
+        String charId = getArguments().getString("id");
+        character = CharacterRepository.INSTANCE.getCharacters().get(charId);
+        /*
          * Inflate the layout for this fragment
          */
-        Configuration config = getActivity().getResources().getConfiguration();
+
         return inflater.inflate(R.layout.attribute_adjuster, container, false);
     }
     @Override
@@ -54,6 +59,8 @@ public class AttributeAdjust extends Fragment {
             public void onClick(View v) {
                 int current = Integer.parseInt(attrLevel.getText().toString());
                 attrLevel.setText(current+1);
+                //change attribute in database
+
             }
         });
 
@@ -62,6 +69,7 @@ public class AttributeAdjust extends Fragment {
             public void onClick(View v) {
                 int current = Integer.parseInt(attrLevel.getText().toString());
                 attrLevel.setText(current-1);
+                //change attribute in database
             }
         });
     }

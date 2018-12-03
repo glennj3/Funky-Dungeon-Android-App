@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="18dp">
+
+    <TextView
+            android:id="@+id/attribute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_weight=".25"
+            android:textStyle="bold"
+            android:textAlignment="viewStart"/>
+    <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider"
+            android:layout_weight=".25"/>
+    <TextView
+            android:id="@+id/attrCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".75"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textAlignment="viewEnd"/>
+
+</LinearLayout>

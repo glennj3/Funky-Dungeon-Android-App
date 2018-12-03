@@ -39,7 +39,7 @@ public class Attributes extends AppCompatActivity {
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.attrRecyclerView);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new AttributeListAdapter(this, attrMap);
+        mAdapter = new AttributeListAdapter(this, attrMap, character);
         // Connect the adapter with the RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
