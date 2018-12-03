@@ -36,7 +36,7 @@
                 android:supportsRtl="true"
                 android:theme="@style/AppTheme"
                 tools:ignore="GoogleAppIndexingWarning"/>
-        <activity android:name=".OverviewActivity">
+        <activity android:name=".ui.OverviewActivity">
         </activity>
     </application>
 

@@ -1,8 +1,9 @@
-package github.com.triplefrequency.funkydungeon
+package github.com.triplefrequency.funkydungeon.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import github.com.triplefrequency.funkydungeon.R
 
 
 class OverviewActivity : AppCompatActivity() {
