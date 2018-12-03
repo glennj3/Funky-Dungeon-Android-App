@@ -16,7 +16,7 @@ class OverviewActivity : AppCompatActivity() {
         var btnSkills = findViewById<Button>(R.id.btn_skills)
         var btnAttacks = findViewById<Button>(R.id.btn_attacks)
 
-        
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
         btnOverview.setOnClickListener {}
