@@ -10,6 +10,7 @@ import android.widget.TextView
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
 import github.com.triplefrequency.funkydungeon.model.Character
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.ui.MainActivity
 import github.com.triplefrequency.funkydungeon.ui.character.CharacterCreatorActivity
 import github.com.triplefrequency.funkydungeon.ui.character.CharacterCreatorFragment
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.rv_character_list_item.view.*
 
 class CharacterRecyclerViewAdapter(
     private val parentActivity: MainActivity,
-    private val values: List<Character>,
+    private val content: CharacterContent,
     private val sideBySide: Boolean
 ) : RecyclerView.Adapter<CharacterRecyclerViewAdapter.CharacterViewHolder>() {
     private val onClickListener: View.OnClickListener
@@ -53,10 +54,10 @@ class CharacterRecyclerViewAdapter(
         return CharacterViewHolder(view)
     }
 
-    override fun getItemCount(): Int = values.size
+    override fun getItemCount(): Int = content.characters.size
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val item = values[position]
+        val item = content.characters[position]
         holder.contentView.text = item.name
 
         with(holder.itemView) {

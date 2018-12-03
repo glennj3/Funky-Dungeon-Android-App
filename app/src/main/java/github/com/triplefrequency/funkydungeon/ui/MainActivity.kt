@@ -1,12 +1,11 @@
 package github.com.triplefrequency.funkydungeon.ui
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AppCompatActivity
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.ui.characterlist.CharacterRecyclerViewAdapter
-import github.com.triplefrequency.funkydungeon.ui.dice.TwoDice_Fragment
 import kotlinx.android.synthetic.main.activity_character_list.*
 
 class MainActivity : AppCompatActivity() {
@@ -38,10 +37,11 @@ class MainActivity : AppCompatActivity() {
         if (character_creator_container != null)
             sideBySide = true
 
-        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, characterContent.characters, sideBySide)
+        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, characterContent, sideBySide)
     }
 
     companion object {
+        //TODO Move the initialization of this into the [SplashActivity]
         lateinit var characterContent: CharacterContent
             private set
         var charactersLoaded = false

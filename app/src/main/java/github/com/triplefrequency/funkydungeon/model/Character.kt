@@ -7,8 +7,10 @@ import github.com.triplefrequency.funkydungeon.repository.savableMap
 import github.com.triplefrequency.funkydungeon.repository.saveDelegate
 import java.util.*
 
-class Character {
-    val id: String by saveDelegate(UUID.randomUUID().toString())
+class Character(
+    val authorUid: String? = null,
+    val id: String = UUID.randomUUID().toString()
+) {
     var name: String by saveDelegate("")
 
     var defensePoints: Int by saveDelegate(10)
