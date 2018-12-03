@@ -10,12 +10,14 @@
         android:paddingRight="16dp"
         tools:context=".OverviewActivity" tools:layout_editor_absoluteY="25dp"
         android:importantForAutofill="no">
+
+
     <EditText
             android:id="@+id/name_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/edit_default"
+            android:hint="Name"
             android:gravity="center_horizontal" tools:ignore="Autofill"/>
 
     <ScrollView
@@ -31,12 +33,24 @@
                           android:gravity="center"
             >
 
+                <TextView
+                        android:id="@+id/def_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Def:"/>
+
                 <EditText
                         android:id="@+id/def_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_default"
                         android:inputType="text" tools:ignore="Autofill"/>
+
+                <TextView
+                        android:id="@+id/hp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HP:"/>
 
                 <EditText
                         android:id="@+id/hp_edit"
@@ -49,6 +63,11 @@
                           android:orientation="horizontal"
                           android:gravity="center">
 
+                <TextView
+                        android:id="@+id/init_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Init:"/>
                 <EditText
                         android:id="@+id/init_Edit"
                         android:layout_width="wrap_content"
@@ -56,6 +75,11 @@
                         android:text="@string/edit_default"
                         android:inputType="text"/>
 
+                <TextView
+                        android:id="@+id/prof_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prof:"/>
                 <EditText
                         android:id="@+id/prof_Edit"
                         android:layout_width="wrap_content"
@@ -63,6 +87,11 @@
                         android:text="@string/edit_default"
                         android:inputType="text"/>
 
+                <TextView
+                        android:id="@+id/sp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spd:"/>
                 <EditText
                         android:id="@+id/speed_Edit"
                         android:layout_width="wrap_content"
@@ -73,6 +102,11 @@
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:orientation="horizontal" android:gravity="center">
+                <TextView
+                        android:id="@+id/race_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Race:"/>
                 <EditText
                         android:id="@+id/race_Edit"
                         android:layout_width="wrap_content"
@@ -80,6 +114,11 @@
                         android:text="@string/edit_default"
                         android:inputType="text"/>
 
+                <TextView
+                        android:id="@+id/aware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aware:"/>
                 <EditText
                         android:id="@+id/aware_edit"
                         android:layout_width="wrap_content"
@@ -92,6 +131,12 @@
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:orientation="horizontal" android:gravity="center">
+
+                <TextView
+                        android:id="@+id/lvl_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Level:"/>
                 <EditText
                         android:id="@+id/lvl_edit"
                         android:layout_width="wrap_content"
@@ -99,6 +144,11 @@
                         android:text="@string/edit_default"
                         android:inputType="text"/>
 
+                <TextView
+                        android:id="@+id/class_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class:"/>
                 <EditText
                         android:id="@+id/class_edit"
                         android:layout_width="wrap_content"
@@ -106,6 +156,11 @@
                         android:text="@string/edit_default"
                         android:inputType="text"/>
 
+                <TextView
+                        android:id="@+id/hit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hit:"/>
                 <EditText
                         android:id="@+id/hit_dice_edit"
                         android:layout_width="wrap_content"
@@ -119,7 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="@string/edit_default"
+                    android:hint="Experience"
                     android:gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>
@@ -133,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="OverVw"/>
+                android:text="Outline"/>
 
         <Button
                 android:layout_width="wrap_content"
