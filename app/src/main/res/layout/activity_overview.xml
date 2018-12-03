@@ -16,8 +16,9 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_centerHorizontal="true"
-            android:layout_above="@id/tab_layout"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+
     >
         <linearlayout
                 android:layout_width="match_parent"
@@ -128,6 +129,6 @@
         </linearlayout>
 
     </ScrollView>
-    
+
 
 </RelativeLayout>
