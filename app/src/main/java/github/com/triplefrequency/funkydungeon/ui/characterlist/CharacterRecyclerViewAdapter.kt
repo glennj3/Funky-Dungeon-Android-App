@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import github.com.triplefrequency.funkydungeon.R
+import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.ui.MainActivity
 import github.com.triplefrequency.funkydungeon.ui.character.CharacterCreatorActivity
@@ -28,7 +29,7 @@ class CharacterRecyclerViewAdapter(
                 setFragment(item)
             else {
                 val intent = Intent(it.context, CharacterCreatorActivity::class.java).apply {
-                    putExtra(CharacterCreatorFragment.ARG_CHARACTER_ID, item.id)
+                    putExtra(ARG_CHARACTER_ID, item.id)
                 }
                 it.context.startActivity(intent)
             }
@@ -38,7 +39,7 @@ class CharacterRecyclerViewAdapter(
     private fun setFragment(item: Character) {
         val fragment = CharacterCreatorFragment().apply {
             arguments = Bundle().apply {
-                putString(CharacterCreatorFragment.ARG_CHARACTER_ID, item.id)
+                putString(ARG_CHARACTER_ID, item.id)
             }
         }
         parentActivity.supportFragmentManager
