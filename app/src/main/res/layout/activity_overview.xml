@@ -128,37 +128,6 @@
         </linearlayout>
 
     </ScrollView>
-
-    <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_tab_action_overview"
-                android:text="@string/overview_tab_label"/>
-
-        <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_tab_action_overview"
-                android:text="@string/attributes_tab_label"/>
-
-        <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_tab_action_overview"
-                android:text="@string/skills_tab_label"/>
-
-        <android.support.design.widget.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:icon="@drawable/ic_tab_action_overview"
-                android:text="@string/attacks_tab_label"/>
-
-    </android.support.design.widget.TabLayout>
-
+    
 
 </RelativeLayout>
