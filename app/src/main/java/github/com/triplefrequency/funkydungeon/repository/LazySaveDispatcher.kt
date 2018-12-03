@@ -5,7 +5,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
 class LazySaveDispatcher {
-    fun dispatch(): Deferred<Unit> = GlobalScope.async {
+    fun dispatch(lock: Any): Deferred<Unit> = GlobalScope.async {
+        synchronized(lock) {
 
+        }
     }
 }

@@ -15,6 +15,10 @@ object CharacterRepository {
             name = "Test Name"
             race = "Test Race"
             cClass = "Test Class"
+        }, "otherTest" to Character().apply {
+            name = "Other Test Name"
+            race = "Test Race"
+            cClass = "Test Class"
         })
     }
 
@@ -30,13 +34,12 @@ object CharacterRepository {
     /**
      * A non-blocking save call to the Cloud FireStore
      */
-    @Synchronized
     fun save(character: Character): Deferred<Unit> =
         if (saveJob != null) {
             // We can null-assert here because we are in a synchronized function, which guarantees saveJob doesn't change
             saveJob!!
         } else {
-            val job = saver.dispatch()
+            val job = saver.dispatch(this)
             saveJob = job
             job
         }
