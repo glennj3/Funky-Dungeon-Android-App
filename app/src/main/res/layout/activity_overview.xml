@@ -132,22 +132,26 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="button1"/>
+                android:background="@android:color/transparent"
+                android:text="OverVw"/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="button1"/>
+                android:background="@android:color/transparent"
+                android:text="Attrib."/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="button1"/>
+                android:background="@android:color/transparent"
+                android:text="Skills"/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="button1"/>
+                android:background="@android:color/transparent"
+                android:text="Attacks"/>
 
     </LinearLayout>
 
