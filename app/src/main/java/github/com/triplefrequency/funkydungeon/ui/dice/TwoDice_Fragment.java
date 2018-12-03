@@ -1,4 +1,4 @@
-package github.com.triplefrequency.funkydungeon.ui;
+package github.com.triplefrequency.funkydungeon.ui.dice;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
+import github.com.triplefrequency.funkydungeon.ui.MainActivity;
 
 import java.util.Random;
 
@@ -39,8 +40,21 @@ public class TwoDice_Fragment extends Fragment {
     private float acelVal;
     private float acelLast;
     private float shake;
+    private int rollTotal;
 
     public TwoDice_Fragment(){}
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
+
+    @Override
+    public void onActivityCreated( Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,35 +86,7 @@ public class TwoDice_Fragment extends Fragment {
         rollDice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
-                final Animation diceAnim2 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
-
-                final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        rollDice.setEnabled(false);
-                        int roll = setDice();
-                        returnRoll(roll);
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                };
-                diceAnim1.setAnimationListener(animationListener);
-                diceAnim2.setAnimationListener(animationListener);
-
-                dice1.startAnimation(diceAnim1);
-                dice2.startAnimation(diceAnim2);
-
+                diceAnim();
             }
         });
     }
@@ -116,37 +102,7 @@ public class TwoDice_Fragment extends Fragment {
             float delta = acelVal - acelLast;
             shake = shake * 0.9f + delta;
             if (shake>12){
-                final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
-                final Animation diceAnim2 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
-
-                final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-
-                        rollDice.setEnabled(false);
-                        int roll = setDice();
-                        returnRoll(roll);
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-
-                    }
-                };
-                diceAnim1.setAnimationListener(animationListener);
-                diceAnim2.setAnimationListener(animationListener);
-
-                dice1.startAnimation(diceAnim1);
-                dice2.startAnimation(diceAnim2);
-
+                diceAnim();
             }
         }
 
@@ -155,14 +111,57 @@ public class TwoDice_Fragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        final Intent i = new Intent(getActivity().getBaseContext(),
+                MainActivity.class);
+        //PACK DATA
+        i.putExtra("ROLL_TOTAL", rollTotal);
+        getActivity().startActivity(i);
+    }
+
     public final int diceRoll(){
         return rando.nextInt(20)+1;
     }
 
-    private int setDice(){
+    private void diceAnim(){
+        final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
+                .getBaseContext().getApplicationContext(),R.anim.shake);
+        final Animation diceAnim2 = AnimationUtils.loadAnimation(getActivity()
+                .getBaseContext().getApplicationContext(),R.anim.shake);
+
+        final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                rollDice.setEnabled(false);
+                sense.unregisterListener(sensorListener);
+                setDice();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
+        diceAnim1.setAnimationListener(animationListener);
+        diceAnim2.setAnimationListener(animationListener);
+
+        dice1.startAnimation(diceAnim1);
+        dice2.startAnimation(diceAnim2);
+
+    }
+
+    private void setDice(){
         int rollOne = diceRoll();
         int rollTwo = diceRoll();
-        int rollTotal = rollOne + rollTwo;
+        rollTotal = rollOne + rollTwo;
 
         String diceFile1 = "d20_side"+String.valueOf(rollOne);
         String diceFile2 = "d20_side"+String.valueOf(rollTwo);
@@ -177,18 +176,18 @@ public class TwoDice_Fragment extends Fragment {
         dice1.setImageResource(resource1);
         dice2.setImageResource(resource2);
 
-        return rollTotal;
+        //return rollTotal;
 
     }
+
+    /*
     //This function returns the total back to the main activity.
     private void returnRoll(int total){
         final Intent i = new Intent(getActivity().getBaseContext(),
                 MainActivity.class);
 
-        //PACK DATA
-        i.putExtra("ROLL_TOTAL", total);
-        //try { Thread.sleep(5000); }
-        //catch (InterruptedException ex) { android.util.Log.d("YourApplicationName", ex.toString()); }
+
+
         new CountDownTimer(3000, 1000) {
 
             @Override
@@ -202,7 +201,7 @@ public class TwoDice_Fragment extends Fragment {
             }
 
         }.start();
-    }
+    }*/
 
 
 }

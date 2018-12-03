@@ -1,4 +1,4 @@
-package github.com.triplefrequency.funkydungeon.ui;
+package github.com.triplefrequency.funkydungeon.ui.dice;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -32,8 +32,21 @@ public class OneDice_Fragment extends Fragment {
     private float acelVal;
     private float acelLast;
     private float shake;
+    private int rollTotal;
 
-    public OneDice_Fragment(){}
+    public OneDice_Fragment() {
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated( Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +60,7 @@ public class OneDice_Fragment extends Fragment {
             return inflater.inflate(R.layout.pm_1dice_roll, container, false);
 
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -65,7 +79,7 @@ public class OneDice_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
+                        .getBaseContext().getApplicationContext(), R.anim.shake);
 
                 final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
                     @Override
@@ -75,9 +89,7 @@ public class OneDice_Fragment extends Fragment {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        rollDice.setEnabled(false);
-                        int roll = setDice();
-                        returnRoll(roll);
+                        diceAnim();
                     }
 
                     @Override
@@ -92,6 +104,7 @@ public class OneDice_Fragment extends Fragment {
             }
         });
     }
+
     private final SensorEventListener sensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
@@ -100,12 +113,12 @@ public class OneDice_Fragment extends Fragment {
             float z = sensorEvent.values[2];
 
             acelLast = acelVal;
-            acelVal = (float) Math.sqrt((double)(x*x + y*y + z+z));
+            acelVal = (float) Math.sqrt((double) (x * x + y * y + z + z));
             float delta = acelVal - acelLast;
             shake = shake * 0.9f + delta;
-            if (shake>12){
+            if (shake > 12) {
                 final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
-                        .getBaseContext().getApplicationContext(),R.anim.shake);
+                        .getBaseContext().getApplicationContext(), R.anim.shake);
 
                 final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
                     @Override
@@ -116,9 +129,7 @@ public class OneDice_Fragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animation animation) {
 
-                        rollDice.setEnabled(false);
-                        int roll = setDice();
-                        returnRoll(roll);
+                        diceAnim();
 
                     }
 
@@ -139,50 +150,55 @@ public class OneDice_Fragment extends Fragment {
 
         }
     };
-    public final int diceRoll(){
-        return rando.nextInt(20)+1;
+    public final int diceRoll() {
+        return rando.nextInt(20) + 1;
     }
 
-    private int setDice(){
-        int rollOne = diceRoll();
-        int rollTotal = rollOne;
+    private void diceAnim() {
+        final Animation diceAnim1 = AnimationUtils.loadAnimation(getActivity()
+                .getBaseContext().getApplicationContext(), R.anim.shake);
+        final Animation diceAnim2 = AnimationUtils.loadAnimation(getActivity()
+                .getBaseContext().getApplicationContext(), R.anim.shake);
 
-        String diceFile1 = "d20_side"+String.valueOf(rollOne);
+        final Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //rollDice.setEnabled(false);
+                //sense.unregisterListener(sensorListener);
+                setDice();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        };
+        diceAnim1.setAnimationListener(animationListener);
+
+        dice1.startAnimation(diceAnim1);
+
+
+    }
+
+    private void setDice() {
+        int rollOne = diceRoll();
+        rollTotal = rollOne;
+
+        String diceFile1 = "d20_side" + String.valueOf(rollOne);
 
 
         int resource1 = getResources().getIdentifier(diceFile1, "drawable", "github.com.triplefrequency.funkydungeon");
-
         total.setText(String.format("You rolled %s!!!", String.valueOf(rollTotal)));
+
         total.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
 
         dice1.setImageResource(resource1);
 
-        return rollTotal;
-
     }
-    //This function returns the total back to the main activity.
-    private void returnRoll(int total){
-        final Intent i = new Intent(getActivity().getBaseContext(),
-                MainActivity.class);
-
-        //PACK DATA
-        i.putExtra("ROLL_TOTAL", total);
-        //try { Thread.sleep(5000); }
-        //catch (InterruptedException ex) { android.util.Log.d("YourApplicationName", ex.toString()); }
-        new CountDownTimer(3000, 1000) {
-
-            @Override
-            public void onTick(long millisUntilFinished) {
-                // do something after 1s
-            }
-
-            @Override
-            public void onFinish() {
-                getActivity().startActivity(i);
-            }
-
-        }.start();
-    }
-
-
 }

@@ -1,13 +1,12 @@
 package github.com.triplefrequency.funkydungeon.ui
 
-import android.content.Intent
-import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.ui.characterlist.CharacterRecyclerViewAdapter
+import github.com.triplefrequency.funkydungeon.ui.dice.TwoDice_Fragment
 import kotlinx.android.synthetic.main.activity_character_list.*
 
 class MainActivity : AppCompatActivity() {

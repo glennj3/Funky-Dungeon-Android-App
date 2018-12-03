@@ -4,7 +4,7 @@
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                tools:context=".ui.OneDice_Fragment">
+                tools:context=".ui.dice.OneDice_Fragment">
 
     <LinearLayout
             android:layout_width="wrap_content"
