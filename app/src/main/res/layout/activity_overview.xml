@@ -186,24 +186,28 @@
             android:orientation="horizontal">
 
         <Button
+                android:id="@+id/btn_overview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Outline"/>
 
         <Button
+                android:id="@+id/btn_attributes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Attrib."/>
 
         <Button
+                android:id="@+id/btn_skills"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Skills"/>
 
         <Button
+                android:id="@+id/btn_attacks"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
