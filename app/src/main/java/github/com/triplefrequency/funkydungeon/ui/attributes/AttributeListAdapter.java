@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
+import github.com.triplefrequency.funkydungeon.model.Character;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -22,6 +24,7 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
     private LayoutInflater mInflater;
     private final Map<String, Integer> mAttrMap;
     private final Object[]  attrStrings;
+    //private Character character;
 
     public AttributeListAdapter(Context context, Map attrMap) {
         mInflater = LayoutInflater.from(context);
@@ -46,6 +49,7 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
     public int getItemCount() {
         return mAttrMap.size();
     }
+
     class AttributeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView attrStringView;
         public final TextView attrIntView;
@@ -63,16 +67,22 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
             // Use that to access the affected item in attrStrings.
-            String element = (String) attrStrings[mPosition];
-            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            String key = (String) attrStrings[mPosition];
+            //Get the corresponding key and bundle both
+            int value = mAttrMap.get(key);
+            Bundle bundle = new Bundle();
+            bundle.putInt("Attribute",value);
 
+            //Create fragment and add bundle
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
             FragmentManager fragmentManager = activity.getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             Fragment attrAdjust = new AttributeAdjust();
+            attrAdjust.setArguments(bundle);
             fragmentTransaction.replace(android.R.id.content, attrAdjust);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-            
+
             // Change the word in the mWordList.
             //mWordList.set(mPosition, "Clicked! " + element);
             // Notify the adapter, that the data has changed so it can

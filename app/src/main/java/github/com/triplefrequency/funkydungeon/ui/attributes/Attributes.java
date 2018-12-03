@@ -16,8 +16,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class Attributes extends AppCompatActivity {
-    //private final LinkedList<String> attributeList = new LinkedList<>();
-    //private final LinkedList<Integer> attrIntList = new LinkedList<>();
+
     private Map<String, Integer> attrMap;
     private RecyclerView mRecyclerView;
     private AttributeListAdapter mAdapter;
@@ -37,7 +36,6 @@ public class Attributes extends AppCompatActivity {
             }
         }
 
-        importAttributes();
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.attrRecyclerView);
         // Create an adapter and supply the data to be displayed.
@@ -47,8 +45,6 @@ public class Attributes extends AppCompatActivity {
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    private void importAttributes(){
-        //attrMap =
-    }
+
 
 }
