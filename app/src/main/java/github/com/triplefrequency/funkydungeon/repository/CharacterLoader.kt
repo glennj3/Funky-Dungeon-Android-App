@@ -1,18 +1,17 @@
 package github.com.triplefrequency.funkydungeon.repository
 
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.model.Character
 
-class CharacterSaver(
+class CharacterLoader(
     /**
-     * The database to which data is being saved.
+     * The database from which character data is being loaded.
      */
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 ) {
     /**
-     * Save the given [Character] to the default Firestore [db]
+     * Load all [Character]s for the given [FirebaseUser]
      */
-    fun save(character: Character) {
-        db.characterCollection.saveCharacter(character)
-    }
+    fun load(user: FirebaseUser?) = db.characterCollection.getCharacters(user)
 }
