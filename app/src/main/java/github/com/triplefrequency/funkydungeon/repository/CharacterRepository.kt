@@ -25,22 +25,41 @@ object CharacterRepository {
     val characters: Map<String, Character>
         get() = characters()
 
-    private val db
-        get() = FirebaseFirestore.getInstance()
-
-    private val saver: LazySaveDispatcher = LazySaveDispatcher()
-    private var saveJob: Deferred<Unit>? = null
+    /**
+     * The actual character saver, with a blocking API that is called from a non-blocking context
+     */
+    private val characterSaver = CharacterSaver()
 
     /**
-     * A non-blocking save call to the Cloud FireStore
+     * The dispatcher used for creating save jobs
      */
-    fun save(character: Character): Deferred<Unit> =
-        if (saveJob != null) {
-            // We can null-assert here because we are in a synchronized function, which guarantees saveJob doesn't change
-            saveJob!!
-        } else {
-            val job = saver.dispatch(this)
-            saveJob = job
+    private val saveDispatcher: LazySaveDispatcher = LazySaveDispatcher()
+    /**
+     * All active save jobs, indexed by [Character.id]
+     */
+    private var saveJobs: MutableMap<String, Deferred<Unit>> = mutableMapOf()
+
+    /**
+     * Return an existing lazy save [Deferred] task or create a new one.
+     */
+    fun save(character: Character): Deferred<Unit> = saveJobs[character.id] ?: dispatchSave(character)
+
+    /**
+     * Return an asynchronous save job, storing it in [saveJobs]
+     */
+    private fun dispatchSave(character: Character): Deferred<Unit> =
+        synchronized(saveJobs) {
+            val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
+            saveJobs[character.id] = job
             job
         }
+
+    /**
+     * The callback function used by the [LazySaveDispatcher] to update the [saveJobs]
+     */
+    private fun processPostSave(character: Character) {
+        synchronized(saveJobs) {
+            saveJobs.remove(character.id)
+        }
+    }
 }
