@@ -3,7 +3,9 @@ package github.com.triplefrequency.funkydungeon.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import github.com.triplefrequency.funkydungeon.model.Character
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
+import java.util.concurrent.Future
 
 object CharacterRepository {
     /**
@@ -26,7 +28,7 @@ object CharacterRepository {
     /**
      * All active save jobs, indexed by [Character.id]
      */
-    private var saveJobs: MutableMap<String, Deferred<Unit>> = mutableMapOf()
+    private var saveJobs: MutableMap<String, Future<*>> = mutableMapOf()
 
     /**
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
@@ -47,13 +49,13 @@ object CharacterRepository {
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
      */
-    fun save(character: Character): Deferred<Unit> = CompletableDeferred(Unit)
-        //synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
+    fun save(character: Character): Future<*> =
+        synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
      */
-    private fun dispatchSave(character: Character): Deferred<Unit> {
+    private fun dispatchSave(character: Character): Future<*> {
         val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
         saveJobs[character.id] = job
         return job
