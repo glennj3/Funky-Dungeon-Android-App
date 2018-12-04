@@ -2,7 +2,6 @@ package github.com.triplefrequency.funkydungeon.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.model.Character
 import kotlinx.coroutines.*
 
@@ -48,17 +47,17 @@ object CharacterRepository {
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
      */
-    fun save(character: Character): Deferred<Unit> = saveJobs[character.id] ?: dispatchSave(character)
+    fun save(character: Character): Deferred<Unit> =
+        synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
      */
-    private fun dispatchSave(character: Character): Deferred<Unit> =
-        synchronized(saveJobs) {
-            val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
-            saveJobs[character.id] = job
-            job
-        }
+    private fun dispatchSave(character: Character): Deferred<Unit> {
+        val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
+        saveJobs[character.id] = job
+        return job
+    }
 
     /**
      * The callback function used by the [LazySaveDispatcher] to update the [saveJobs]

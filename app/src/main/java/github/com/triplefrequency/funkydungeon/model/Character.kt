@@ -8,31 +8,54 @@ import github.com.triplefrequency.funkydungeon.repository.saveDelegate
 import java.util.*
 
 class Character(
-    val authorUid: String? = null,
-    val id: String = UUID.randomUUID().toString()
-) {
-    var name: String by saveDelegate("")
+    override val authorUid: String? = null,
+    override val id: String = UUID.randomUUID().toString(),
+    name: String = "",
+    defensePoints: Int = 10,
+    hitPoints: Int = 10,
+    initiative: Int = 0,
+    proficiency: Int = 0,
+    speed: Int = 10,
+    race: String = "",
+    awareness: Int = 0,
+    level: Int = 1,
+    cClass: String = "",
+    hitDice: String = "1d8",
+    xp: Int = 0,
+    attributes: ObservableMap<String, Int>? = null,
+    proficiencies: ObservableList<String>? = null,
+    attacks: ObservableList<CharacterWeapon>? = null
+) : ICharacter {
+    override var name: String by saveDelegate(name)
 
-    var defensePoints: Int by saveDelegate(10)
-    var hitPoints: Int by saveDelegate(10)
+    override var defensePoints: Int by saveDelegate(defensePoints)
+    override var hitPoints: Int by saveDelegate(hitPoints)
 
-    var race: String by saveDelegate("")
-    var awareness: Int by saveDelegate(0)
+    override var initiative: Int by saveDelegate(initiative)
+    override var proficiency: Int by saveDelegate(proficiency)
+    override var speed: Int by saveDelegate(speed)
 
-    var level: Int by saveDelegate(1)
-    var cClass: String by saveDelegate("")
-    var hitDice: String by saveDelegate("1d8")
+    override var race: String by saveDelegate(race)
+    override var awareness: Int by saveDelegate(awareness)
 
-    var xp: Int by saveDelegate(0)
+    override var level: Int by saveDelegate(level)
+    override var cClass: String by saveDelegate(cClass)
+    override var hitDice: String by saveDelegate(hitDice)
 
-    var attributes: ObservableMap<String, Int> = savableMap()
+    override var xp: Int by saveDelegate(xp)
 
-    var proficiencies: ObservableList<String> = savableList()
+    override var attributes: ObservableMap<String, Int> = attributes ?: savableMap()
 
-    var attacks: ObservableList<CharacterWeapon> = savableList()
+    override var proficiencies: ObservableList<String> = proficiencies ?: savableList()
 
-    val attributeEntries
+    override var attacks: ObservableList<CharacterWeapon> = attacks ?: savableList()
+
+    override val attributeEntries
         get() = attributes.entries.sortedBy { it.key }
 
     override fun toString() = name
+
+    companion object {
+        fun fromDatabase(char: DatabaseCharacter?) = char?.run { Character(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes, proficiencies, attacks) }
+    }
 }

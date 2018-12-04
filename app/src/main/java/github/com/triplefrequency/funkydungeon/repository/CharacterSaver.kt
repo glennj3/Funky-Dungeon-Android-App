@@ -1,5 +1,6 @@
 package github.com.triplefrequency.funkydungeon.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.model.Character
 
