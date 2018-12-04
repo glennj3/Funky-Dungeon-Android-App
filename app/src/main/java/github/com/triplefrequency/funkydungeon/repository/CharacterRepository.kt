@@ -47,8 +47,8 @@ object CharacterRepository {
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
      */
-    fun save(character: Character): Deferred<Unit> =
-        synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
+    fun save(character: Character): Deferred<Unit> = CompletableDeferred(Unit)
+        //synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
