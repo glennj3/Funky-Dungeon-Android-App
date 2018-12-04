@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:text="Init:"/>
                 <EditText
-                        android:id="@+id/init_Edit"
+                        android:id="@+id/init_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_default"
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:text="Prof:"/>
                 <EditText
-                        android:id="@+id/prof_Edit"
+                        android:id="@+id/prof_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_default"
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:text="Spd:"/>
                 <EditText
-                        android:id="@+id/speed_Edit"
+                        android:id="@+id/speed_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_default"
@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:text="Race:"/>
                 <EditText
-                        android:id="@+id/race_Edit"
+                        android:id="@+id/race_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/edit_default"
