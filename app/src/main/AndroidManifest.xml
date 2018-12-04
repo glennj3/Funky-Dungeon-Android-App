@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="github.com.triplefrequency.funkydungeon">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="github.com.triplefrequency.funkydungeon">
 
     <application
         android:allowBackup="true"
@@ -13,31 +13,34 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.character.CharacterCreatorActivity"
-                android:label="@string/creatorActivityName"
-                android:parentActivityName=".ui.MainActivity"
-                android:theme="@style/AppTheme">
+            android:name=".ui.character.CharacterCreatorActivity"
+            android:label="@string/creatorActivityName"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.MainActivity" />
         </activity>
         <activity
-                android:name=".ui.MainActivity"
-                android:allowBackup="true"
-                android:icon="@mipmap/ic_splash_img"
-                android:label="@string/app_name"
-                android:roundIcon="@mipmap/ic_splash_img_round"
-                android:supportsRtl="true"
-                android:theme="@style/AppTheme"
-                tools:ignore="GoogleAppIndexingWarning"/>
-        <activity android:name=".ui.OverviewActivity">
-        </activity>
+            android:name=".ui.MainActivity"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_splash_img"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_splash_img_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning" />
+        <activity android:name=".ui.OverviewActivity"></activity>
+        <activity
+            android:name=".ui.proficiency.ProficiencyActivity"
+            android:label="@string/title_activity_proficiency"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

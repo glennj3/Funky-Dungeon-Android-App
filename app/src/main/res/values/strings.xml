@@ -9,4 +9,5 @@
     <string name="attributes_tab_label">Attribute</string>
     <string name="skills_tab_label">Skills</string>
     <string name="attacks_tab_label">Attacks</string>
+    <string name="title_activity_proficiency">ProficiencyActivity</string>
 </resources>
