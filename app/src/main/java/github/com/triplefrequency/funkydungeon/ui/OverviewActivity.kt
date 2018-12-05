@@ -12,6 +12,9 @@ import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
 import kotlinx.android.synthetic.main.activity_overview.*
 import kotlinx.android.synthetic.main.toolbar_bottom.*
+import github.com.triplefrequency.funkydungeon.R.id.toolbar
+
+
 
 class OverviewActivity : CharacterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +23,7 @@ class OverviewActivity : CharacterActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { view -> onBackPressed() }
 
         btn_overview.isEnabled = false
 
