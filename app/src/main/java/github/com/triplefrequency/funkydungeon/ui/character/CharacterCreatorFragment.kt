@@ -19,7 +19,7 @@ class CharacterCreatorFragment : Fragment() {
 
         arguments?.let {
             if (it.containsKey(ARG_CHARACTER_ID)) {
-                item = MainActivity.characterContent.characterMap[it.getString(ARG_CHARACTER_ID)]
+                //item = MainActivity.characterContent.characterMap[it.getString(ARG_CHARACTER_ID)]
                 activity?.toolbar?.title = item?.name
             }
         }

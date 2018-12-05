@@ -33,12 +33,6 @@ class MainActivity : AppCompatActivity() {
         // if (character_creator_container != null)
         //     sideBySide = true
 
-        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, characterContent, sideBySide)
-    }
-
-    companion object {
-        //TODO Move the initialization of this into the [SplashActivity]
-        var characterContent = CharacterContent()
-            private set
+        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, CharacterContent, sideBySide)
     }
 }
