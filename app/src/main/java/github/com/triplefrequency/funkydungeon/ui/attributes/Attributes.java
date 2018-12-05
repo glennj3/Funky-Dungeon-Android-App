@@ -9,13 +9,13 @@ import github.com.triplefrequency.funkydungeon.R;
 import github.com.triplefrequency.funkydungeon.core.Constants;
 import github.com.triplefrequency.funkydungeon.model.Character;
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
+import kotlin.Pair;
 
 import java.util.*;
 
 public class Attributes extends AppCompatActivity {
 
-    private Map<String, Integer> attrMap;
-    private List<Map.Entry<String, Integer>> attrEntryList;
+    private List<Pair<String, Integer>> attrList;
     private RecyclerView mRecyclerView;
     private AttributeListAdapter mAdapter;
     private Character character;
@@ -29,9 +29,8 @@ public class Attributes extends AppCompatActivity {
             String id = attrIntent.getStringExtra(Constants.ARG_CHARACTER_ID);
             if (id != null) {
                 character = CharacterRepository.INSTANCE.getCharacters().get(id);
-                if (character != null){
-                    attrMap = character.getAttributes();
-                    attrEntryList = character.getAttributeEntries();
+                if (character != null) {
+                    attrList = character.getAttributes();
                 }
             }
         }
@@ -39,7 +38,7 @@ public class Attributes extends AppCompatActivity {
         // Get a handle to the RecyclerView.
         mRecyclerView = findViewById(R.id.attrRecyclerView);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new AttributeListAdapter(this, attrMap, attrEntryList, character);
+        mAdapter = new AttributeListAdapter(this, attrList, character);
         // Connect the adapter with the RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -27,12 +28,12 @@ class OverviewActivity : AppCompatActivity() {
         if (outIntent != null) {
             val id = outIntent.getStringExtra(Constants.ARG_CHARACTER_ID)
             if (id != null) {
-                character = CharacterRepository.characters[id] ?: Character().apply { CharacterRepository.save(this) }
+                character = CharacterRepository.characters[id] ?: newCharacter()
             }
         }
         // Initialize a default character if the character still isn't loaded
         if (!::character.isInitialized) {
-            character = Character()
+            character = newCharacter()
         }
         val btnOverview = findViewById<Button>(R.id.btn_overview)
         val btnAttributes = findViewById<Button>(R.id.btn_attributes)
@@ -78,6 +79,11 @@ class OverviewActivity : AppCompatActivity() {
 
     }
 
+    private fun newCharacter() = Character().apply {
+        CharacterRepository.save(this)
+
+    }
+
     private fun notBlank(sequence: CharSequence?) =
         if (sequence?.isNotBlank() == true) sequence.toString() to null else null to "Must not be blank"
 
@@ -111,7 +117,6 @@ private fun <T> EditText.newOnTextChanged(lam: (T?) -> Unit, validate: ((CharSeq
                 }
                 if (error == null) {
                     this@newOnTextChanged.error = null
-                    this@newOnTextChanged.clearFocus()
                     lam(value)
                 } else {
                     this@newOnTextChanged.error = error

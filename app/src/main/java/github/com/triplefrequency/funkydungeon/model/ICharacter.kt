@@ -18,8 +18,7 @@ interface ICharacter {
     var cClass: String
     var hitDice: String
     var xp: Int
-    var attributes: ObservableMap<String, Int>
+    var attributes: ObservableList<Pair<String, Int>>
     var proficiencies: ObservableList<String>
     var attacks: ObservableList<CharacterWeapon>
-    val attributeEntries: List<MutableMap.MutableEntry<String, Int>>
 }

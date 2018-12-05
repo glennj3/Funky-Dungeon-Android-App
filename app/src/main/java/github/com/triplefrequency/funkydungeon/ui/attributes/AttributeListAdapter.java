@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
 import github.com.triplefrequency.funkydungeon.model.Character;
+import kotlin.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -21,14 +22,12 @@ import java.util.Map;
 public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdapter.AttributeViewHolder> {
 
     private LayoutInflater mInflater;
-    private final Map<String, Integer> mAttrMap;
-    private final List<Map.Entry<String, Integer>> mAttrList;
+    private final List<Pair<String, Integer>> mAttrList;
     private Character character;
 
-    public AttributeListAdapter(Context context, Map<String, Integer> attrMap, List<Map.Entry<String, Integer>> attrList, Character charac) {
+    public AttributeListAdapter(Context context, List<Pair<String, Integer>> attrList, Character charac) {
         mInflater = LayoutInflater.from(context);
         character = charac;
-        this.mAttrMap = attrMap;
         this.mAttrList = attrList;
     }
 
@@ -41,9 +40,9 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
 
     @Override
     public void onBindViewHolder(@NonNull AttributeListAdapter.AttributeViewHolder attrViewHolder, int position) {
-        Map.Entry<String, Integer> entry = mAttrList.get(position);
-        attrViewHolder.attrStringView.setText(entry.getKey());
-        attrViewHolder.attrIntView.setText(String.valueOf(entry.getValue()));
+        Pair<String, Integer> entry = mAttrList.get(position);
+        attrViewHolder.attrStringView.setText(entry.getFirst());
+        attrViewHolder.attrIntView.setText(String.valueOf(entry.getSecond()));
     }
 
     @Override
@@ -68,9 +67,9 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
             // Use that to access the affected item in attrStrings.
-            Map.Entry<String, Integer> entry = mAttrList.get(mPosition);
+            Pair<String, Integer> entry = mAttrList.get(mPosition);
             //Get the corresponding key and bundle both
-            int value = entry.getValue();
+            int value = entry.getSecond();
             Bundle bundle = new Bundle();
             bundle.putInt("Attribute", value);
             String id = character.getId();

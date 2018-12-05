@@ -18,8 +18,7 @@ data class DatabaseCharacter(
     override var cClass: String,
     override var hitDice: String,
     override var xp: Int,
-    override var attributes: ObservableMap<String, Int>,
+    override var attributes: ObservableList<Pair<String, Int>>,
     override var proficiencies: ObservableList<String>,
-    override var attacks: ObservableList<CharacterWeapon>,
-    override val attributeEntries: List<MutableMap.MutableEntry<String, Int>>
+    override var attacks: ObservableList<CharacterWeapon>
 ) : ICharacter
