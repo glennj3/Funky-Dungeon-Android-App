@@ -12,8 +12,6 @@ import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
 import kotlinx.android.synthetic.main.activity_overview.*
 import kotlinx.android.synthetic.main.toolbar_bottom.*
-import github.com.triplefrequency.funkydungeon.R.id.toolbar
-
 
 
 class OverviewActivity : CharacterActivity() {
@@ -68,9 +66,9 @@ class OverviewActivity : CharacterActivity() {
         if (id == R.id.character_list_btn) {
             startActivity(Intent(this, MainActivity::class.java))
             return true
-        } else if (id == R.id.action_favorite) {
+        } else if (id == R.id.character_delete) {
             //TODO see if there's a use for buttons
-            Toast.makeText(this@OverviewActivity, "Its Save!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@OverviewActivity, "Its Delete!", Toast.LENGTH_SHORT).show()
             return true
         }
 
