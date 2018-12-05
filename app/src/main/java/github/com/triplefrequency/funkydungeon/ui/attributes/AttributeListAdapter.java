@@ -25,10 +25,10 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     private final List<Pair<String, Integer>> mAttrList;
     private Character character;
 
-    public AttributeListAdapter(Context context, List<Pair<String, Integer>> attrList, Character charac) {
+    public AttributeListAdapter(Context context, Character charac) {
         mInflater = LayoutInflater.from(context);
         character = charac;
-        this.mAttrList = attrList;
+        this.mAttrList = charac.getAttributes();
     }
 
     @NonNull

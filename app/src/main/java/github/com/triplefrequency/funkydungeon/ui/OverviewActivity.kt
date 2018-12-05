@@ -2,51 +2,24 @@ package github.com.triplefrequency.funkydungeon.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
-import github.com.triplefrequency.funkydungeon.core.Constants
-import github.com.triplefrequency.funkydungeon.model.Character
-import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
-import github.com.triplefrequency.funkydungeon.ui.attributes.Attributes
 import kotlinx.android.synthetic.main.activity_overview.*
+import kotlinx.android.synthetic.main.toolbar_bottom.*
 
-class OverviewActivity : AppCompatActivity() {
-
-    lateinit var character: Character
-    lateinit var ovBar: Toolbar
-
+class OverviewActivity : CharacterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
+        setSupportActionBar(overview_toolbar)
 
-        ovBar = findViewById(R.id.overview_toolbar)
-        setSupportActionBar(ovBar)
-
-        val outIntent = intent
-        if (outIntent != null) {
-            val id = outIntent.getStringExtra(Constants.ARG_CHARACTER_ID)
-            if (id != null) {
-                character = CharacterRepository.characters[id] ?: newCharacter()
-            }
-        }
-        // Initialize a default character if the character still isn't loaded
-        if (!::character.isInitialized) {
-            character = newCharacter()
-        }
-        val btnOverview = findViewById<Button>(R.id.btn_overview)
-        val btnAttributes = findViewById<Button>(R.id.btn_attributes)
-        val btnSkills = findViewById<Button>(R.id.btn_skills)
-        val btnAttacks = findViewById<Button>(R.id.btn_attacks)
+        btn_overview.isEnabled = false
 
         name_edit.newOnTextChanged({ character.name = it ?: "" }, ::notBlank)
         def_edit.newOnTextChanged({ character.defensePoints = it ?: 10 }, ::uintCheck)
@@ -73,19 +46,6 @@ class OverviewActivity : AppCompatActivity() {
         lvl_edit.setText(character.level.toString(), TextView.BufferType.NORMAL)
         class_edit.setText(character.cClass, TextView.BufferType.NORMAL)
         hit_dice_edit.setText(character.hitDice, TextView.BufferType.NORMAL)
-
-
-        btnOverview.isEnabled = false
-        btnAttributes.setOnClickListener {
-            //intent.putExtra()
-            startActivity(Intent(this, Attributes::class.java).apply {
-                putExtra(Constants.ARG_CHARACTER_ID, character.id)
-            })
-        }
-        btnSkills.setOnClickListener {}
-        btnAttacks.setOnClickListener {}
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -107,11 +67,6 @@ class OverviewActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun newCharacter() = Character().apply {
-        CharacterRepository.save(this)
-
     }
 
     private fun notBlank(sequence: CharSequence?) =
