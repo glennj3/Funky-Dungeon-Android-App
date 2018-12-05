@@ -3,6 +3,7 @@ package github.com.triplefrequency.funkydungeon.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import github.com.triplefrequency.funkydungeon.model.Character
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.Deferred
 import java.util.concurrent.Future
@@ -56,6 +57,9 @@ object CharacterRepository {
      * Return an asynchronous save job, storing it in [saveJobs]
      */
     private fun dispatchSave(character: Character): Future<*> {
+        // Update the local cache if necessary
+        if (CharacterContent.characterMap[character.id] == null)
+            CharacterContent.characterMap[character.id] = character
         val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
         saveJobs[character.id] = job
         return job

@@ -4,10 +4,10 @@ import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
-class CharacterContent {
+object CharacterContent {
     private var cacheTime: Long = 0
-    private var cachedCharacterMap: Map<String, Character> = mapOf()
-    private var cachedCharacterList: List<Character> = listOf()
+    private var cachedCharacterMap: MutableMap<String, Character> = mutableMapOf()
+    private var cachedCharacterList: MutableList<Character> = mutableListOf()
 
     val characters: List<Character>
         get() {
@@ -16,7 +16,7 @@ class CharacterContent {
         }
 
 
-    val characterMap: Map<String, Character>
+    val characterMap: MutableMap<String, Character>
         get() {
             verifyCache()
             return cachedCharacterMap
@@ -42,14 +42,12 @@ class CharacterContent {
         async(Dispatchers.IO) {
             synchronized(this) {
                 cacheTime = System.currentTimeMillis()
-                cachedCharacterMap = CharacterRepository.characters
-                cachedCharacterList = cachedCharacterMap.map { it.value }
+                cachedCharacterMap = CharacterRepository.characters.toMutableMap()
+                cachedCharacterList = cachedCharacterMap.map { it.value }.toMutableList()
             }
         }
     }
 
-    companion object {
-        val MAX_CACHE_AGE = TimeUnit.MINUTES.toMillis(3)
-        val REFRESH_CACHE_AGE = MAX_CACHE_AGE / 2
-    }
+    private val MAX_CACHE_AGE = TimeUnit.MINUTES.toMillis(3)
+    private val REFRESH_CACHE_AGE = MAX_CACHE_AGE / 2
 }
