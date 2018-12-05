@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     internal lateinit var toTheDice: FloatingActionButton
 
-    private var charCount = CharacterContent.characters.size
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character_list)
@@ -54,16 +52,11 @@ class MainActivity : AppCompatActivity() {
 
         characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, CharacterContent, sideBySide)
 
-        /*CharacterContent.characterMap.addOnMapChangedCallback(object: ObservableMap.OnMapChangedCallback<ObservableMap<String, Character>, String, Character>() {
+        CharacterContent.characterMap.addOnMapChangedCallback(object: ObservableMap.OnMapChangedCallback<ObservableMap<String, Character>, String, Character>() {
             override fun onMapChanged(sender: ObservableMap<String, Character>, key: String) {
-
+                characterRecyclerView.adapter.notifyDataSetChanged()
             }
-        })*/
-    }
-
-    override fun onResume() {
-        super.onResume()
-        characterRecyclerView.adapter.notifyDataSetChanged()
+        })
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {

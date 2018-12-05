@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
@@ -25,7 +26,7 @@ abstract class CharacterActivity : AppCompatActivity() {
         return@lazy newCharacter()
     }
 
-    private fun newCharacter() = Character().apply {
+    private fun newCharacter() = Character(FirebaseAuth.getInstance().currentUser?.uid).apply {
         CharacterRepository.save(this)
     }
 
