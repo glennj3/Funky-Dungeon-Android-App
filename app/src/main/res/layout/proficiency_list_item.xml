@@ -6,8 +6,10 @@
     android:orientation="vertical"
     android:padding="6dp">
 
-    <TextView
+    <EditText
         android:id="@+id/prof_item"
-        style="@style/proficiency_item" />
+        style="@style/proficiency_item"
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
 </LinearLayout>

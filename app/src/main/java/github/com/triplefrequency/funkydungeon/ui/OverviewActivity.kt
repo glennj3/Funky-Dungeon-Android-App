@@ -17,7 +17,9 @@ class OverviewActivity : CharacterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
-        setSupportActionBar(overview_toolbar)
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         btn_overview.isEnabled = false
 
