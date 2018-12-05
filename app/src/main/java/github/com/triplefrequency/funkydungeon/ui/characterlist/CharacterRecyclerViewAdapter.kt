@@ -56,9 +56,10 @@ class CharacterRecyclerViewAdapter(
         return CharacterViewHolder(view)
     }
 
-    override fun getItemCount(): Int = content.characterMap.size
+    override fun getItemCount(): Int = content.characters.size
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        Log.d("Test", "Charater count: ${content.characters.size}")
         val item = content.characters[position]
         holder.contentView.text = item.name
 

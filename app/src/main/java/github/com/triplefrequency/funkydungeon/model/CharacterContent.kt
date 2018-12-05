@@ -50,18 +50,7 @@ object CharacterContent {
         async(Dispatchers.IO) {
             synchronized(this) {
                 cacheTime = System.currentTimeMillis()
-                cachedCharacterMap = CharacterRepository.characters.apply {
-                    addOnMapChangedCallback(object: ObservableMap.OnMapChangedCallback<ObservableMap<String, Character>, String, Character>() {
-                        override fun onMapChanged(sender: ObservableMap<String, Character>, key: String) {
-                            synchronized(CharacterContent) {
-                                cachedCharacterList = cachedCharacterMap.map { it.value }.toMutableList()
-                                if (sender[key] == null)
-                                    CharacterRepository.delete(key)
-                            }
-                        }
-
-                    })
-                }
+                cachedCharacterMap = CharacterRepository.characters
                 cachedCharacterList = cachedCharacterMap.map { it.value }.toMutableList()
             }
         }

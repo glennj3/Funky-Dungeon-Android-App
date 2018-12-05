@@ -17,13 +17,4 @@ class CharacterSaver(
             db.characterCollection.saveCharacter(character)
         }
     }
-
-    /**
-     * Delete the [Character] represented by the given [id]
-     */
-    fun delete(id: String) {
-        synchronized(db) {
-            db.characterCollection.deleteCharacter(id)
-        }
-    }
 }

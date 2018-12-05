@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import github.com.triplefrequency.funkydungeon.R
-import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -21,10 +20,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
         }
-        GlobalScope.launch {
-            CharacterContent.characterMap
-        }
-
         return@runBlocking
     }
 
