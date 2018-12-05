@@ -8,6 +8,7 @@ import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import java.util.concurrent.Future
 
 object CharacterRepository {
     /**
@@ -30,7 +31,7 @@ object CharacterRepository {
     /**
      * All active save jobs, indexed by [Character.id]
      */
-    private var saveJobs: MutableMap<String, Deferred<Unit>> = mutableMapOf()
+    private var saveJobs: MutableMap<String, Future<*>> = mutableMapOf()
 
     /**
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
@@ -51,7 +52,7 @@ object CharacterRepository {
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
      */
-    fun save(character: Character): Deferred<Unit> =
+    fun save(character: Character): Future<*> =
         synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
     fun delete(characterId: String): Deferred<Unit> =
@@ -60,7 +61,7 @@ object CharacterRepository {
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
      */
-    private fun dispatchSave(character: Character): Deferred<Unit> {
+    private fun dispatchSave(character: Character): Future<*> {
         // Update the local cache if necessary
         synchronized(CharacterContent) {
             if (CharacterContent.characterMap[character.id] == null) {
@@ -68,13 +69,13 @@ object CharacterRepository {
                 CharacterContent.characters = CharacterContent.characterMap.map { it.value }.toMutableList()
             }
         }
-        return GlobalScope.async {
+        /*return GlobalScope.async {
             characterSaver.save(character)
             processPostSave(character)
-        }
-        //val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
-        //saveJobs[character.id] = job
-        //return job
+        }*/
+        val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
+        saveJobs[character.id] = job
+        return job
     }
 
     /**

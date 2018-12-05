@@ -5,6 +5,7 @@ import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import github.com.triplefrequency.funkydungeon.model.Character
@@ -14,15 +15,15 @@ val FirebaseFirestore.characterCollection get() = this.collection("characters")
 
 fun CollectionReference.getCharacters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser) =
     ObservableArrayMap<String, Character>().also { map ->
-        val existing = mutableMapOf<String, Character>()
-        existing.apply {
-            whereEqualTo(
-                DatabaseCharacter::authorUid.name,
-                user?.uid
-            ).get(if (user == null) Source.CACHE else Source.DEFAULT).addOnSuccessListener {
+        whereEqualTo(
+            DatabaseCharacter::authorUid.name,
+            user?.uid
+        ).apply {
+            val existing = mutableMapOf<String, Character>()
+            get(if (user == null) Source.CACHE else Source.DEFAULT).addOnSuccessListener {
                 for (document in it.documents) {
                     val character = Character.fromDatabase(document.toObject(DatabaseCharacter::class.java))
-                    if (character != null) this@apply[character.id] = character
+                    if (character != null) existing[character.id] = character
                 }
 
                 map.putAll(existing)
@@ -31,6 +32,27 @@ fun CollectionReference.getCharacters(user: FirebaseUser? = FirebaseAuth.getInst
                     map[k] = v
                 }
             }
+            /*addSnapshotListener { snapshots, e ->
+                if (e != null)
+                    return@addSnapshotListener
+                for (dc in snapshots!!.documentChanges) {
+                    when (dc.type) {
+                        DocumentChange.Type.ADDED -> {
+                            val character = Character.fromDatabase(dc.document.toObject(DatabaseCharacter::class.java))
+                            if (character != null) map[character.id] = character
+                        }
+                        DocumentChange.Type.MODIFIED -> {
+                            val character = dc.document.toObject(DatabaseCharacter::class.java)
+                            map[character.id]?.update(character)
+                        }
+                        DocumentChange.Type.REMOVED -> {
+                            val character = Character.fromDatabase(dc.document.toObject(DatabaseCharacter::class.java))
+                            if (character != null)
+                                map.remove(character.id)
+                        }
+                    }
+                }
+            }*/
         }
     }
 
