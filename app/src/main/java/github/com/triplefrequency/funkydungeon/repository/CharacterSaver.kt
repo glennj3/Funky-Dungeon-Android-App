@@ -1,6 +1,5 @@
 package github.com.triplefrequency.funkydungeon.repository
 
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.model.Character
 
@@ -14,6 +13,8 @@ class CharacterSaver(
      * Save the given [Character] to the default Firestore [db]
      */
     fun save(character: Character) {
-        db.characterCollection.saveCharacter(character)
+        synchronized(db) {
+            db.characterCollection.saveCharacter(character)
+        }
     }
 }

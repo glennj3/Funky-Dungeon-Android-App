@@ -1,49 +1,25 @@
 package github.com.triplefrequency.funkydungeon.ui.attributes;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import github.com.triplefrequency.funkydungeon.R;
-import github.com.triplefrequency.funkydungeon.core.Constants;
-import github.com.triplefrequency.funkydungeon.model.Character;
-import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
-import kotlin.Pair;
+import github.com.triplefrequency.funkydungeon.ui.CharacterActivity;
 
-import java.util.*;
-
-public class Attributes extends AppCompatActivity {
-
-    private List<Pair<String, Integer>> attrList;
-    private RecyclerView mRecyclerView;
-    private AttributeListAdapter mAdapter;
-    private Character character;
-
+public class Attributes extends CharacterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pm_attributes_layout);
-        Intent attrIntent = getIntent();
-        if (attrIntent != null) {
-            String id = attrIntent.getStringExtra(Constants.ARG_CHARACTER_ID);
-            if (id != null) {
-                character = CharacterRepository.INSTANCE.getCharacters().get(id);
-                if (character != null) {
-                    attrList = character.getAttributes();
-                }
-            }
-        }
+        findViewById(R.id.btn_attributes).setEnabled(false);
 
         // Get a handle to the RecyclerView.
-        mRecyclerView = findViewById(R.id.attrRecyclerView);
+        RecyclerView mRecyclerView = findViewById(R.id.attrRecyclerView);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new AttributeListAdapter(this, attrList, character);
+        AttributeListAdapter mAdapter = new AttributeListAdapter(this, getCharacter());
         // Connect the adapter with the RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 }

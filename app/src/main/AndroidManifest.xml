@@ -37,10 +37,27 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning" />
+
         <activity android:name=".ui.OverviewActivity">
 
         </activity>
         <activity android:name=".ui.attributes.Attributes">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.OverviewActivity" />
+        </activity>
+        <activity
+            android:name=".ui.proficiency.ProficiencyActivity"
+            android:label="@string/title_activity_proficiency"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.OverviewActivity" />
+        </activity>
+        <activity
+            android:name=".ui.attacks.AttackActivity"
+            android:label="Attacks"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.OverviewActivity" />
