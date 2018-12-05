@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:onClick="onClickedOverview"
-        android:text="Outline" />
+        android:text="@string/overview_tab_label" />
 
     <Button
         android:id="@+id/btn_attributes"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:onClick="onClickedAttributes"
-        android:text="Attrib." />
+        android:text="@string/attributes_tab_label" />
 
     <Button
         android:id="@+id/btn_skills"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:onClick="onClickedProficiencies"
-        android:text="Skills" />
+        android:text="@string/skills_tab_label" />
 
     <Button
         android:id="@+id/btn_attacks"
@@ -35,6 +35,6 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:onClick="onClickedAttacks"
-        android:text="Attacks" />
+        android:text="@string/attacks_tab_label" />
 
 </LinearLayout>
