@@ -7,6 +7,7 @@ import android.widget.Button
 import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
+import github.com.triplefrequency.funkydungeon.ui.attacks.AttackActivity
 import github.com.triplefrequency.funkydungeon.ui.attributes.Attributes
 import github.com.triplefrequency.funkydungeon.ui.proficiency.ProficiencyActivity
 
@@ -30,7 +31,7 @@ abstract class CharacterActivity : AppCompatActivity() {
     fun onClickedOverview(view: View) = onClickedGeneric(view, OverviewActivity::class.java)
     fun onClickedAttributes(view: View) = onClickedGeneric(view, Attributes::class.java)
     fun onClickedProficiencies(view: View) = onClickedGeneric(view, ProficiencyActivity::class.java)
-    fun onClickedAttacks(view: View) = onClickedGeneric(view)
+    fun onClickedAttacks(view: View) = onClickedGeneric(view, AttackActivity::class.java)
 
     private fun onClickedGeneric(view: View, clazz: Class<*>? = null) {
         if ((view !is Button || view.isEnabled) && clazz != null) {

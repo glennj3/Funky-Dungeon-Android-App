@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import github.com.triplefrequency.funkydungeon.core.Constants;
 import github.com.triplefrequency.funkydungeon.model.Character;
 import github.com.triplefrequency.funkydungeon.model.CharacterWeapon;
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
+import github.com.triplefrequency.funkydungeon.ui.CharacterActivity;
 import github.com.triplefrequency.funkydungeon.ui.attributes.AttributeAdjust;
 import github.com.triplefrequency.funkydungeon.ui.attributes.AttributeListAdapter;
 
@@ -22,33 +24,19 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class AttackActivity extends AppCompatActivity {
-
-    private List<CharacterWeapon> attackList;
-    private RecyclerView mRecyclerView;
-    private AttackListAdapter mAdapter;
-    private Character character;
-    private Button addAttack;
+public class AttackActivity extends CharacterActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent attrIntent = getIntent();
-        addAttack = findViewById(R.id.addAttack);
-        if (attrIntent != null) {
-            String id = attrIntent.getStringExtra(Constants.ARG_CHARACTER_ID);
-            if (id != null) {
-                character = CharacterRepository.INSTANCE.getCharacters().get(id);
-                if (character != null) {
-                    attackList = character.getAttacks();
-                }
-            }
-        }
+        setContentView(R.layout.attack_layout);
+        findViewById(R.id.btn_attacks).setEnabled(false);
+        FloatingActionButton addAttack = findViewById(R.id.addAttack);
 
         // Get a handle to the RecyclerView.
-        mRecyclerView = findViewById(R.id.attackRecyclerView);
+        RecyclerView mRecyclerView = findViewById(R.id.attackRecyclerView);
         // Create an adapter and supply the data to be displayed.
-        mAdapter = new AttackListAdapter(this, attackList, character);
+        AttackListAdapter mAdapter = new AttackListAdapter(this, getCharacter());
         // Connect the adapter with the RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // Give the RecyclerView a default layout manager.

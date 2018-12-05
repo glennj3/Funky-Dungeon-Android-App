@@ -54,6 +54,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.OverviewActivity" />
         </activity>
+        <activity
+            android:name=".ui.attacks.AttackActivity"
+            android:label="Attacks"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.OverviewActivity" />
+        </activity>
 
     </application>
 

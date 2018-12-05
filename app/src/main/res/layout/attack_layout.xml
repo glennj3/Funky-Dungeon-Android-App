@@ -9,10 +9,10 @@
         android:orientation="vertical"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        tools:context=".AttackActivity" tools:layout_editor_absoluteY="25dp"
+        tools:context=".ui.attacks.AttackActivity" tools:layout_editor_absoluteY="25dp"
         android:importantForAutofill="no">
 
-    EditText
+    <!--EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top"
@@ -29,7 +29,7 @@
             android:padding="20dp">
     </android.support.v7.widget.RecyclerView>
 
-    //Floating action button
+    <!-- //Floating action button -->
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/addAttack"
             android:layout_width="wrap_content"
@@ -39,42 +39,7 @@
             android:layout_margin="16dp"
             android:tint="@android:color/white"/>
 
-    //Buttons at the bottom
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal">
-
-        <Button
-                android:id="@+id/btn_overview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Outline"/>
-
-        <Button
-                android:id="@+id/btn_attributes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Attrib."/>
-
-        <Button
-                android:id="@+id/btn_skills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Skills"/>
-
-        <Button
-                android:id="@+id/btn_attacks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Attacks"/>
-
-
-    </LinearLayout>
+    <!-- //Buttons at the bottom -->
+    <include layout="@layout/toolbar_bottom"/>
 
 </LinearLayout>
