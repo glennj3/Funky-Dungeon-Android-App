@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
@@ -52,11 +53,17 @@ class MainActivity : AppCompatActivity() {
 
         characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, CharacterContent, sideBySide)
 
-        CharacterContent.characterMap.addOnMapChangedCallback(object: ObservableMap.OnMapChangedCallback<ObservableMap<String, Character>, String, Character>() {
+        CharacterContent.characterMap.addOnMapChangedCallback(object :
+            ObservableMap.OnMapChangedCallback<ObservableMap<String, Character>, String, Character>() {
             override fun onMapChanged(sender: ObservableMap<String, Character>, key: String) {
                 characterRecyclerView.adapter.notifyDataSetChanged()
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        characterRecyclerView.adapter.notifyDataSetChanged()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -80,7 +87,9 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             MENU_LOGOUT -> {
-                AuthUI.getInstance().signOut(this).addOnCompleteListener {
+                AuthUI.getInstance().signOut(this).continueWith {
+                    FirebaseFirestore.getInstance().disableNetwork()
+                }.addOnCompleteListener {
                     Toast.makeText(this, "Successfully Logged Out", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -95,8 +104,12 @@ class MainActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
 
             if (resultCode == Activity.RESULT_OK) {
-                val user = FirebaseAuth.getInstance().currentUser!!
-                CharacterRepository.characters(null).forEach { it.value.authorUid = user.uid }
+                FirebaseFirestore.getInstance().enableNetwork().addOnCompleteListener {
+                    val user = FirebaseAuth.getInstance().currentUser!!
+                    CharacterRepository.characters(null).forEach { it.value.authorUid = user.uid }
+                    CharacterContent.updateCache()
+                        .invokeOnCompletion { characterRecyclerView.adapter.notifyDataSetChanged() }
+                }
             } else {
                 Toast.makeText(this, "Failed to Log In", Toast.LENGTH_SHORT).show()
             }

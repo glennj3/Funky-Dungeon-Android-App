@@ -46,7 +46,7 @@ object CharacterContent {
         }
     }
 
-    private fun updateCache(): Deferred<Unit> = runBlocking {
+    internal fun updateCache(): Deferred<Unit> = runBlocking {
         async(Dispatchers.IO) {
             synchronized(this) {
                 cacheTime = System.currentTimeMillis()

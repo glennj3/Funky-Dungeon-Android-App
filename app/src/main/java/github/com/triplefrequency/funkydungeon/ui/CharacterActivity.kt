@@ -26,9 +26,7 @@ abstract class CharacterActivity : AppCompatActivity() {
         return@lazy newCharacter()
     }
 
-    private fun newCharacter() = Character(FirebaseAuth.getInstance().currentUser?.uid).apply {
-        CharacterRepository.save(this)
-    }
+    private fun newCharacter() = Character(FirebaseAuth.getInstance().currentUser?.uid)
 
     fun onClickedOverview(view: View) = onClickedGeneric(view, OverviewActivity::class.java)
     fun onClickedAttributes(view: View) = onClickedGeneric(view, Attributes::class.java)
