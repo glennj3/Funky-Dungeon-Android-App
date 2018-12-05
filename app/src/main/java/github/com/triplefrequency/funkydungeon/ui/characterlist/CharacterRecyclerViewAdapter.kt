@@ -12,6 +12,7 @@ import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.ui.MainActivity
+import github.com.triplefrequency.funkydungeon.ui.OverviewActivity
 import github.com.triplefrequency.funkydungeon.ui.character.CharacterCreatorActivity
 import github.com.triplefrequency.funkydungeon.ui.character.CharacterCreatorFragment
 import kotlinx.android.synthetic.main.rv_character_list_item.view.*
@@ -29,7 +30,7 @@ class CharacterRecyclerViewAdapter(
             if (sideBySide)
                 setFragment(item)
             else {
-                val intent = Intent(it.context, CharacterCreatorActivity::class.java).apply {
+                val intent = Intent(it.context, OverviewActivity::class.java).apply {
                     putExtra(ARG_CHARACTER_ID, item.id)
                 }
                 it.context.startActivity(intent)

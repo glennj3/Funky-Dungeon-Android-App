@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        tools:context=".OverviewActivity" tools:layout_editor_absoluteY="25dp"
-        android:importantForAutofill="no">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+              tools:context=".ui.OverviewActivity"
+              tools:layout_editor_absoluteY="25dp">
 
+    <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/overview_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </android.support.v7.widget.Toolbar>
 
     <EditText
             android:id="@+id/name_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:gravity="center_horizontal"
             android:hint="Name"
-            android:gravity="center_horizontal" tools:ignore="Autofill"/>
+            android:inputType="text"
+            android:text="Name"
+            tools:ignore="Autofill"/>
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-    >
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
+            android:layout_weight="1">
 
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:gravity="center"
-            >
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                 <TextView
                         android:id="@+id/def_text"
@@ -44,8 +55,8 @@
                         android:id="@+id/def_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text" tools:ignore="Autofill"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/hp_text"
@@ -57,162 +68,151 @@
                         android:id="@+id/hp_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text" tools:ignore="Autofill"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal"
-                          android:gravity="center">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                 <TextView
                         android:id="@+id/init_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Init:"/>
+
                 <EditText
                         android:id="@+id/init_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/prof_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Prof:"/>
+
                 <EditText
                         android:id="@+id/prof_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/sp_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Spd:"/>
+
                 <EditText
                         android:id="@+id/speed_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="numberSigned"
+                        android:text="@string/edit_default"/>
 
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal" android:gravity="center">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                 <TextView
                         android:id="@+id/race_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Race:"/>
+
                 <EditText
                         android:id="@+id/race_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/aware_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aware:"/>
+
                 <EditText
                         android:id="@+id/aware_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
 
             </LinearLayout>
 
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                          android:orientation="horizontal" android:gravity="center">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                 <TextView
                         android:id="@+id/lvl_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Level:"/>
+
                 <EditText
                         android:id="@+id/lvl_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/class_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Class:"/>
+
                 <EditText
                         android:id="@+id/class_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         android:id="@+id/hit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:text="Hit:"/>
+
                 <EditText
                         android:id="@+id/hit_dice_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/edit_default"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
             </LinearLayout>
+
             <EditText
                     android:id="@+id/xp_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:gravity="center_horizontal"
                     android:hint="Experience"
-                    android:gravity="center_horizontal"/>
+                    android:inputType="text"
+                    android:text="0"/>
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:orientation="horizontal">
 
-        <Button
-                android:id="@+id/btn_overview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Outline"/>
-
-        <Button
-                android:id="@+id/btn_attributes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Attrib."/>
-
-        <Button
-                android:id="@+id/btn_skills"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Skills"/>
-
-        <Button
-                android:id="@+id/btn_attacks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="Attacks"/>
-
-    </LinearLayout>
+    <include layout="@layout/toolbar_bottom"/>
 
 </LinearLayout>

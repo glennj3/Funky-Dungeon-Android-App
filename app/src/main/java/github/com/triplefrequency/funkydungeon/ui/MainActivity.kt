@@ -1,5 +1,6 @@
 package github.com.triplefrequency.funkydungeon.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +14,9 @@ class MainActivity : AppCompatActivity() {
 
     private var sideBySide = false
 
-    internal lateinit var toTheDice : FloatingActionButton
+    internal lateinit var toTheDice: FloatingActionButton
+
+    private var charCount = CharacterContent.characters.size
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,22 +33,24 @@ class MainActivity : AppCompatActivity() {
         }
         setSupportActionBar(toolbar)
 
-        if (!charactersLoaded) {
-            characterContent = CharacterContent()
-            charactersLoaded = true
+        floatingActionButton.setOnClickListener {
+            // Don't pass a character ID, the overview activity will automatically create a new character.
+            startActivity(Intent(it.context, OverviewActivity::class.java))
         }
 
-        if (character_creator_container != null)
-            sideBySide = true
+        // if (character_creator_container != null)
+        //     sideBySide = true
 
-        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, characterContent, sideBySide)
+        characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, CharacterContent, sideBySide)
     }
 
-    companion object {
-        //TODO Move the initialization of this into the [SplashActivity]
-        lateinit var characterContent: CharacterContent
-            private set
-        var charactersLoaded = false
-            private set
+    override fun onResume() {
+        super.onResume()
+
+        if (CharacterContent.characters.size != charCount) {
+            charCount = CharacterContent.characters.size
+            // TODO Change this to be more efficient
+            characterRecyclerView.adapter.notifyDataSetChanged()
+        }
     }
 }

@@ -22,7 +22,7 @@ class Character(
     cClass: String = "",
     hitDice: String = "1d8",
     xp: Int = 0,
-    attributes: ObservableMap<String, Int>? = null,
+    attributes: ObservableList<Pair<String, Int>>? = null,
     proficiencies: ObservableList<String>? = null,
     attacks: ObservableList<CharacterWeapon>? = null
 ) : ICharacter {
@@ -44,14 +44,17 @@ class Character(
 
     override var xp: Int by saveDelegate(xp)
 
-    override var attributes: ObservableMap<String, Int> = attributes ?: savableMap()
+    override var attributes: ObservableList<Pair<String, Int>> = attributes ?: savableList()
+
+    init {
+        if (this.attributes.size != 6) {
+            this.attributes.addAll(listOf("Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma").map { it to 0 })
+        }
+    }
 
     override var proficiencies: ObservableList<String> = proficiencies ?: savableList()
 
     override var attacks: ObservableList<CharacterWeapon> = attacks ?: savableList()
-
-    override val attributeEntries
-        get() = attributes.entries.sortedBy { it.key }
 
     override fun toString() = name
 

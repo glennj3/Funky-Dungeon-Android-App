@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:onClick="onClickedOverview"
+        android:text="Outline" />
+
+    <Button
+        android:id="@+id/btn_attributes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:onClick="onClickedAttributes"
+        android:text="Attrib." />
+
+    <Button
+        android:id="@+id/btn_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:onClick="onClickedProficiencies"
+        android:text="Skills" />
+
+    <Button
+        android:id="@+id/btn_attacks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:onClick="onClickedAttacks"
+        android:text="Attacks" />
+
+</LinearLayout>

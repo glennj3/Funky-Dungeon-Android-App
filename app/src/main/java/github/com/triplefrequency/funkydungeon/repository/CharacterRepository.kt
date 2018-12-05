@@ -3,7 +3,10 @@ package github.com.triplefrequency.funkydungeon.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import github.com.triplefrequency.funkydungeon.model.Character
-import kotlinx.coroutines.*
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
+import java.util.concurrent.Future
 
 object CharacterRepository {
     /**
@@ -26,17 +29,17 @@ object CharacterRepository {
     /**
      * All active save jobs, indexed by [Character.id]
      */
-    private var saveJobs: MutableMap<String, Deferred<Unit>> = mutableMapOf()
+    private var saveJobs: MutableMap<String, Future<*>> = mutableMapOf()
 
     /**
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
      */
     fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): Map<String, Character> {
-        return mapOf("test" to Character().apply {
+        return mapOf("test" to Character(id = "test").apply {
             name = "Test Name"
             race = "Test Race"
             cClass = "Test Class"
-        }, "otherTest" to Character().apply {
+        }, "otherTest" to Character(id = "otherTest").apply {
             name = "Other Test Name"
             race = "Test Race"
             cClass = "Test Class"
@@ -47,13 +50,16 @@ object CharacterRepository {
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
      */
-    fun save(character: Character): Deferred<Unit> = CompletableDeferred(Unit)
-        //synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
+    fun save(character: Character): Future<*> =
+        synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
      */
-    private fun dispatchSave(character: Character): Deferred<Unit> {
+    private fun dispatchSave(character: Character): Future<*> {
+        // Update the local cache if necessary
+        if (CharacterContent.characterMap[character.id] == null)
+            CharacterContent.characterMap[character.id] = character
         val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
         saveJobs[character.id] = job
         return job
