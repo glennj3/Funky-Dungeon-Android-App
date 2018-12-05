@@ -14,7 +14,7 @@
             android:id="@+id/action_favorite"
             android:orderInCategory="300"
             android:title="Save"
-            android:icon="@android:drawable/ic_menu_save"
+            android:icon="@drawable/d20_blank"
             app:showAsAction="ifRoom"/>
 
 </menu>

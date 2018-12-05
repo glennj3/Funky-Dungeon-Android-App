@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.OverviewActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp" android:layout_margin="5dp">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -42,46 +42,88 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="5dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp"
+                    >
 
                 <TextView
-                    android:id="@+id/def_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Def:" />
-
-                <EditText
-                    android:id="@+id/def_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/line"
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
 
                 <TextView
-                    android:id="@+id/hp_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HP:" />
+                        android:id="@+id/def_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Def:"/>
 
                 <EditText
-                    android:id="@+id/hp_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/def_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
+
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
+                <TextView
+                        android:id="@+id/hp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HP:"/>
+
+                <EditText
+                        android:id="@+id/hp_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
+
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_horizontal"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
 
                 <TextView
                     android:id="@+id/init_text"
@@ -97,6 +139,14 @@
                     android:text="@string/edit_default" />
 
                 <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
+                <TextView
                     android:id="@+id/prof_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,6 +160,14 @@
                     android:text="@string/edit_default" />
 
                 <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
+                <TextView
                     android:id="@+id/sp_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -122,13 +180,32 @@
                     android:inputType="numberSigned"
                     android:text="@string/edit_default" />
 
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:layout_margin="20dp">
+
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
 
                 <TextView
                     android:id="@+id/race_text"
@@ -144,6 +221,14 @@
                     android:text="@string/edit_default" />
 
                 <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
+                <TextView
                     android:id="@+id/aware_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,15 +241,32 @@
                     android:inputType="number"
                     android:text="@string/edit_default" />
 
-
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:background="@color/colorPrimary">
 
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
                 <TextView
                     android:id="@+id/lvl_text"
                     android:layout_width="wrap_content"
@@ -177,6 +279,15 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:text="@string/edit_default" />
+
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
 
                 <TextView
                     android:id="@+id/class_text"
@@ -192,6 +303,15 @@
                     android:text="@string/edit_default" />
 
                 <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000" />
+
+                <TextView
                     android:id="@+id/hit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -205,6 +325,16 @@
                     android:inputType="text"
                     android:text="@string/edit_default" />
 
+                <TextView
+                        style="?android:attr/listSeparatorTextViewStyle"
+                        android:paddingTop="5dip"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/connect_help"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#000"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"/>
             </LinearLayout>
 
             <EditText
