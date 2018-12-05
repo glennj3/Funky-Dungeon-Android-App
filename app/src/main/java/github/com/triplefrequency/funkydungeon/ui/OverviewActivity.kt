@@ -10,6 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
+import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 import kotlinx.android.synthetic.main.activity_overview.*
 import kotlinx.android.synthetic.main.toolbar_bottom.*
 
@@ -67,8 +69,14 @@ class OverviewActivity : CharacterActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             return true
         } else if (id == R.id.character_delete) {
-            //TODO see if there's a use for buttons
-            Toast.makeText(this@OverviewActivity, "Its Delete!", Toast.LENGTH_SHORT).show()
+
+            Toast.makeText(this@OverviewActivity, "Its Gone!", Toast.LENGTH_SHORT).show()
+
+            CharacterContent.characterMap.remove(character.id)
+            CharacterRepository.delete(character.id)
+            finish()
+            startActivity(Intent(this, MainActivity::class.java))
+
             return true
         }
 
