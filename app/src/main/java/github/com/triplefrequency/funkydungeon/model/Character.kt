@@ -55,6 +55,6 @@ class Character(
     override fun toString() = name
 
     companion object {
-        fun fromDatabase(char: DatabaseCharacter?) = char?.run { Character(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes, proficiencies, attacks) }
+        fun fromDatabase(char: DatabaseCharacter?) = char?.run { Character(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes.map { (atr, v) -> atr to v }, proficiencies, attacks) }
     }
 }

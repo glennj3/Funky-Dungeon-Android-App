@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseUser
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 object CharacterRepository {
     /**
@@ -52,6 +54,9 @@ object CharacterRepository {
     fun save(character: Character): Deferred<Unit> =
         synchronized(saveJobs) { saveJobs[character.id] ?: dispatchSave(character) }
 
+    fun delete(characterId: String): Deferred<Unit> =
+            GlobalScope.async { characterSaver.delete(characterId) }
+
     /**
      * Return an asynchronous save job, storing it in [saveJobs]
      */
@@ -63,9 +68,13 @@ object CharacterRepository {
                 CharacterContent.characters = CharacterContent.characterMap.map { it.value }.toMutableList()
             }
         }
-        val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
-        saveJobs[character.id] = job
-        return job
+        return GlobalScope.async {
+            characterSaver.save(character)
+            processPostSave(character)
+        }
+        //val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
+        //saveJobs[character.id] = job
+        //return job
     }
 
     /**
