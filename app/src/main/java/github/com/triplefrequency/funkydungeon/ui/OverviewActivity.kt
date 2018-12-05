@@ -7,50 +7,59 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import github.com.triplefrequency.funkydungeon.R
-import kotlinx.android.synthetic.main.activity_overview.*
+import github.com.triplefrequency.funkydungeon.core.Constants
+import github.com.triplefrequency.funkydungeon.model.Character
+import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 
+import kotlinx.android.synthetic.main.activity_overview.*
+import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KProperty
+import kotlin.reflect.KType
 
 class OverviewActivity : AppCompatActivity() {
 
+    lateinit var character: Character
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
 
+        val outIntent = intent
+        if (outIntent != null) {
+            val id = outIntent.getStringExtra(Constants.ARG_CHARACTER_ID)
+            if (id != null) {
+                character = CharacterRepository.characters[id] ?: Character()
+            }
+        }
         val btnOverview = findViewById<Button>(R.id.btn_overview)
         val btnAttributes = findViewById<Button>(R.id.btn_attributes)
         val btnSkills = findViewById<Button>(R.id.btn_skills)
         val btnAttacks = findViewById<Button>(R.id.btn_attacks)
 
-        var nameEdit = findViewById<EditText>(R.id.name_edit)
-        var defEdit = findViewById<EditText>(R.id.def_edit)
-        var hpEdit = findViewById<EditText>(R.id.hp_edit)
-        var initEdit = findViewById<EditText>(R.id.init_edit)
-        var profEdit = findViewById<EditText>(R.id.prof_edit)
-        var speedEdit = findViewById<EditText>(R.id.speed_edit)
-        var raceEdit = findViewById<EditText>(R.id.race_edit)
-        var awareEdit = findViewById<EditText>(R.id.aware_edit)
-
-        var etList =
-            listOf<EditText>(nameEdit, defEdit, hpEdit, initEdit, profEdit, speedEdit, raceEdit, awareEdit)
 
 
-        for (et in etList) {
-            et.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(editable: Editable?) {}
+        name_edit.setText(character.name)
+        def_edit.setText(character.defensePoints)
+        hp_edit.setText(character.hitPoints)
+        init_edit.setText(character.initiative)
+        prof_edit.setText(character.proficiencies.size)
+        speed_edit.setText(character.speed)
+        race_edit.setText(character.race)
+        aware_edit.setText(character.awareness)
 
-                override fun beforeTextChanged(str: CharSequence?, start: Int, count: Int, after: Int) {}
+        name_edit.onTextChanged { character.name = it?.toString() ?: "" }
+        def_edit.onTextChanged { character.defensePoints = it?.toString()?.toInt() ?: 10 }
+        hp_edit.onTextChanged { character.hitPoints = it?.toString()?.toInt() ?: 10 }
+        init_edit.onTextChanged { character.initiative = it?.toString()?.toInt() ?: 10 }
+        prof_edit.onTextChanged { character.proficiencies.size }
+        speed_edit.onTextChanged { character.speed = it?.toString()?.toInt() ?: 10 }
+        race_edit.onTextChanged { character.race = it?.toString() ?: "" }
+        aware_edit.onTextChanged { character.awareness = it?.toString()?.toInt() ?: 10 }
 
-                override fun onTextChanged(str: CharSequence?, start: Int, count: Int, after: Int) {
-                    //TODO change database when entry changed, find out how to get the given id.
-                    updateDatabase(et, str)
-                }
-            })
-        }
 
         btnOverview.isEnabled = false
         btnAttributes.setOnClickListener {
-            //intent.putExtra(the id would go here if not already in intent from main activity)
+            //intent.putExtra()
             //startActivity(Intent(this, MainActivity::class.java))
         }
         btnSkills.setOnClickListener {}
@@ -59,23 +68,14 @@ class OverviewActivity : AppCompatActivity() {
 
     }
 
-    private fun updateDatabase(et: EditText, str: CharSequence?) {
 
-        if(str == null){}
-        else{
-            when(et.id){
-                R.id.name_edit -> print(str)
-                R.id.def_edit -> print(str)
-                R.id.hp_edit -> print(str)
-                R.id.init_edit -> print(str)
-                R.id.prof_edit -> print(str)
-                R.id.speed_edit -> print(str)
-                R.id.race_edit -> print(str)
-                R.id.aware_edit -> print(str)
+}
 
-            }
-        }
+private fun EditText.onTextChanged(lam: (CharSequence?) -> Unit) = object: TextWatcher {
+    override fun afterTextChanged(p0: Editable?) {}
 
-    }
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { lam(p0) }
 
 }
