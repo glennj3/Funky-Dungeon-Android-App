@@ -22,10 +22,6 @@ class CharacterContent {
             return cachedCharacterMap
         }
 
-    init {
-        GlobalScope.launch { verifyCache() }
-    }
-
     private fun verifyCache() = runBlocking {
         when (System.currentTimeMillis() - cacheTime) {
             // Do nothing if the cache is recent enough
@@ -42,11 +38,13 @@ class CharacterContent {
         }
     }
 
-    private fun updateCache(): Deferred<Unit> = GlobalScope.async {
-        synchronized(this) {
-            cacheTime = System.currentTimeMillis()
-            cachedCharacterMap = CharacterRepository.characters
-            cachedCharacterList = cachedCharacterMap.map { it.value }
+    private fun updateCache(): Deferred<Unit> = runBlocking {
+        async(Dispatchers.IO) {
+            synchronized(this) {
+                cacheTime = System.currentTimeMillis()
+                cachedCharacterMap = CharacterRepository.characters
+                cachedCharacterList = cachedCharacterMap.map { it.value }
+            }
         }
     }
 
