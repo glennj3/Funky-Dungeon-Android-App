@@ -3,12 +3,16 @@ package github.com.triplefrequency.funkydungeon.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.Character
@@ -19,10 +23,14 @@ import kotlinx.android.synthetic.main.activity_overview.*
 class OverviewActivity : AppCompatActivity() {
 
     lateinit var character: Character
+    lateinit var ovBar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_overview)
+
+        ovBar = findViewById(R.id.overview_toolbar)
+        setSupportActionBar(ovBar)
 
         val outIntent = intent
         if (outIntent != null) {
@@ -77,6 +85,28 @@ class OverviewActivity : AppCompatActivity() {
         btnSkills.setOnClickListener {}
         btnAttacks.setOnClickListener {}
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu to use in the action bar
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_overview, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.itemId
+
+        if (id == R.id.character_list_btn) {
+            startActivity(Intent(this, MainActivity::class.java))
+            return true
+        } else if (id == R.id.action_favorite) {
+            Toast.makeText(this@OverviewActivity, "Its Save!", Toast.LENGTH_SHORT).show()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun newCharacter() = Character().apply {

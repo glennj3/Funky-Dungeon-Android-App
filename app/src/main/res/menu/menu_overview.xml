@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".OverviewActivity">
+
+    <item
+            android:id="@+id/character_list_btn"
+            android:orderInCategory="300"
+            android:title="CharacterList"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            app:showAsAction="ifRoom"/>
+    <item
+            android:id="@+id/action_favorite"
+            android:orderInCategory="300"
+            android:title="Save"
+            android:icon="@android:drawable/ic_menu_save"
+            app:showAsAction="ifRoom"/>
+
+</menu>
