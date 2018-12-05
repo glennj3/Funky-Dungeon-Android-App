@@ -10,8 +10,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
+import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 import kotlinx.android.synthetic.main.activity_overview.*
 import kotlinx.android.synthetic.main.toolbar_bottom.*
+
 
 class OverviewActivity : CharacterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +23,7 @@ class OverviewActivity : CharacterActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { view -> onBackPressed() }
 
         btn_overview.isEnabled = false
 
@@ -64,9 +68,15 @@ class OverviewActivity : CharacterActivity() {
         if (id == R.id.character_list_btn) {
             startActivity(Intent(this, MainActivity::class.java))
             return true
-        } else if (id == R.id.action_favorite) {
-            //TODO see if there's a use for buttons
-            Toast.makeText(this@OverviewActivity, "Its Save!", Toast.LENGTH_SHORT).show()
+        } else if (id == R.id.character_delete) {
+
+            Toast.makeText(this@OverviewActivity, "Its Gone!", Toast.LENGTH_SHORT).show()
+
+            CharacterContent.characterMap.remove(character.id)
+            CharacterRepository.delete(character.id)
+            finish()
+            startActivity(Intent(this, MainActivity::class.java))
+
             return true
         }
 
