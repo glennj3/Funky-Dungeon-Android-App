@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     private var sideBySide = false
 
-    internal lateinit var toTheDice : FloatingActionButton
+    internal lateinit var toTheDice: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,22 +30,15 @@ class MainActivity : AppCompatActivity() {
         }
         setSupportActionBar(toolbar)
 
-        if (!charactersLoaded) {
-            characterContent = CharacterContent()
-            charactersLoaded = true
-        }
-
-        if (character_creator_container != null)
-            sideBySide = true
+        // if (character_creator_container != null)
+        //     sideBySide = true
 
         characterRecyclerView.adapter = CharacterRecyclerViewAdapter(this, characterContent, sideBySide)
     }
 
     companion object {
         //TODO Move the initialization of this into the [SplashActivity]
-        lateinit var characterContent: CharacterContent
-            private set
-        var charactersLoaded = false
+        var characterContent = CharacterContent()
             private set
     }
 }

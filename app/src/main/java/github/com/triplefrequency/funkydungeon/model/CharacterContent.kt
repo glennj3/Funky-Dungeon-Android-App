@@ -1,10 +1,7 @@
 package github.com.triplefrequency.funkydungeon.model
 
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
 
 class CharacterContent {
@@ -24,6 +21,10 @@ class CharacterContent {
             verifyCache()
             return cachedCharacterMap
         }
+
+    init {
+        GlobalScope.launch { verifyCache() }
+    }
 
     private fun verifyCache() = runBlocking {
         when (System.currentTimeMillis() - cacheTime) {
