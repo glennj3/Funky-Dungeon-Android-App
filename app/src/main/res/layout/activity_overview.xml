@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.OverviewActivity"
-    tools:layout_editor_absoluteY="25dp" android:layout_margin="5dp">
+    tools:context=".ui.OverviewActivity" >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
