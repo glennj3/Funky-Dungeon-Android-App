@@ -8,7 +8,7 @@ import github.com.triplefrequency.funkydungeon.repository.saveDelegate
 import java.util.*
 
 class Character(
-    override val authorUid: String? = null,
+    authorUid: String? = null,
     override val id: String = UUID.randomUUID().toString(),
     name: String = "",
     defensePoints: Int = 10,
@@ -22,10 +22,12 @@ class Character(
     cClass: String = "",
     hitDice: String = "1d8",
     xp: Int = 0,
-    attributes: ObservableList<Pair<String, Int>>? = null,
-    proficiencies: ObservableList<String>? = null,
-    attacks: ObservableList<CharacterWeapon>? = null
+    attributes: List<Pair<String, Int>> = listOf("Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma").map { it to 0 },
+    proficiencies: List<String>? = null,
+    attacks: List<CharacterWeapon>? = null
 ) : ICharacter {
+    override var authorUid: String? by saveDelegate(authorUid)
+
     override var name: String by saveDelegate(name)
 
     override var defensePoints: Int by saveDelegate(defensePoints)
@@ -44,17 +46,11 @@ class Character(
 
     override var xp: Int by saveDelegate(xp)
 
-    override var attributes: ObservableList<Pair<String, Int>> = attributes ?: savableList()
+    override var attributes: ObservableList<Pair<String, Int>> = savableList(attributes)
 
-    init {
-        if (this.attributes.size != 6) {
-            this.attributes.addAll(listOf("Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma").map { it to 0 })
-        }
-    }
+    override var proficiencies: ObservableList<String> = savableList(proficiencies)
 
-    override var proficiencies: ObservableList<String> = proficiencies ?: savableList()
-
-    override var attacks: ObservableList<CharacterWeapon> = attacks ?: savableList()
+    override var attacks: ObservableList<CharacterWeapon> = savableList(attacks)
 
     override fun toString() = name
 

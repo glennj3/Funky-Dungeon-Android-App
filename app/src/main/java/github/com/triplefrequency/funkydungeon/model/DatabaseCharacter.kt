@@ -1,24 +1,23 @@
 package github.com.triplefrequency.funkydungeon.model
 
-import android.databinding.ObservableList
-import android.databinding.ObservableMap
+import java.util.*
 
 data class DatabaseCharacter(
-    override val authorUid: String?,
-    override val id: String,
-    override var name: String,
-    override var defensePoints: Int,
-    override var hitPoints: Int,
-    override var initiative: Int,
-    override var proficiency: Int,
-    override var speed: Int,
-    override var race: String,
-    override var awareness: Int,
-    override var level: Int,
-    override var cClass: String,
-    override var hitDice: String,
-    override var xp: Int,
-    override var attributes: ObservableList<Pair<String, Int>>,
-    override var proficiencies: ObservableList<String>,
-    override var attacks: ObservableList<CharacterWeapon>
-) : ICharacter
+    val authorUid: String? = null,
+    val id: String = UUID.randomUUID().toString(),
+    var name: String = "",
+    var defensePoints: Int = 10,
+    var hitPoints: Int = 10,
+    var initiative: Int = 0,
+    var proficiency: Int = 0,
+    var speed: Int = 10,
+    var race: String = "",
+    var awareness: Int = 0,
+    var level: Int = 1,
+    var cClass: String = "",
+    var hitDice: String = "1d8",
+    var xp: Int = 0,
+    var attributes: List<Pair<String, Int>> = listOf(),
+    var proficiencies: List<String> = listOf(),
+    var attacks: List<CharacterWeapon> = listOf()
+)

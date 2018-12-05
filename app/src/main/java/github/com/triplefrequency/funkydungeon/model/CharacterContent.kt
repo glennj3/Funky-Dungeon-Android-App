@@ -1,22 +1,30 @@
 package github.com.triplefrequency.funkydungeon.model
 
+import android.databinding.ObservableArrayMap
+import android.databinding.ObservableMap
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.util.concurrent.TimeUnit
 
 object CharacterContent {
     private var cacheTime: Long = 0
-    private var cachedCharacterMap: MutableMap<String, Character> = mutableMapOf()
+    private var cachedCharacterMap: ObservableMap<String, Character> = ObservableArrayMap<String, Character>()
     private var cachedCharacterList: MutableList<Character> = mutableListOf()
 
-    val characters: List<Character>
+    var characters: MutableList<Character>
         get() {
             verifyCache()
             return cachedCharacterList
         }
+        set(value) {
+            cachedCharacterList = value
+        }
 
 
-    val characterMap: MutableMap<String, Character>
+    val characterMap: ObservableMap<String, Character>
         get() {
             verifyCache()
             return cachedCharacterMap
@@ -42,7 +50,7 @@ object CharacterContent {
         async(Dispatchers.IO) {
             synchronized(this) {
                 cacheTime = System.currentTimeMillis()
-                cachedCharacterMap = CharacterRepository.characters.toMutableMap()
+                cachedCharacterMap = CharacterRepository.characters
                 cachedCharacterList = cachedCharacterMap.map { it.value }.toMutableList()
             }
         }

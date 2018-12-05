@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.Character
+import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 import github.com.triplefrequency.funkydungeon.ui.attacks.AttackActivity
 import github.com.triplefrequency.funkydungeon.ui.attributes.Attributes
@@ -17,7 +18,7 @@ abstract class CharacterActivity : AppCompatActivity() {
         if (outIntent != null) {
             val id = outIntent.getStringExtra(Constants.ARG_CHARACTER_ID)
             if (id != null) {
-                return@lazy CharacterRepository.characters[id] ?: newCharacter()
+                return@lazy CharacterContent.characterMap[id] ?: newCharacter()
             }
         }
         // Initialize a default character if the character still isn't loaded

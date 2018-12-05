@@ -22,7 +22,9 @@ fun <K, V> Character.savableMap() = ObservableArrayMap<K, V>().apply {
     })
 }
 
-fun <T> Character.savableList() = ObservableArrayList<T>().apply {
+fun <T> Character.savableList(initialValues: List<T>? = null) = ObservableArrayList<T>().apply {
+    if (initialValues != null)
+        this.addAll(initialValues)
     addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableList<T>>() {
         override fun onChanged(sender: ObservableList<T>?) {
             CharacterRepository.save(this@savableList)

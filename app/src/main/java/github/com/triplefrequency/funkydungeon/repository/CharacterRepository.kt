@@ -1,5 +1,6 @@
 package github.com.triplefrequency.funkydungeon.repository
 
+import android.databinding.ObservableMap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import github.com.triplefrequency.funkydungeon.model.Character
@@ -10,7 +11,7 @@ object CharacterRepository {
     /**
      * Get all characters for the locally signed-in [FirebaseUser]
      */
-    val characters: Map<String, Character>
+    val characters: ObservableMap<String, Character>
         get() = characters()
 
     private val characterLoader = CharacterLoader()
@@ -32,8 +33,9 @@ object CharacterRepository {
     /**
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
      */
-    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): Map<String, Character> {
-        return mapOf("test" to Character(id = "test").apply {
+    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): ObservableMap<String, Character> {
+        return characterLoader.load(user)
+        /*mapOf("test" to Character(id = "test").apply {
             name = "Test Name"
             race = "Test Race"
             cClass = "Test Class"
@@ -41,8 +43,7 @@ object CharacterRepository {
             name = "Other Test Name"
             race = "Test Race"
             cClass = "Test Class"
-        })
-        // characterLoader.load(user)
+        })*/
     }
 
     /**
@@ -56,8 +57,12 @@ object CharacterRepository {
      */
     private fun dispatchSave(character: Character): Deferred<Unit> {
         // Update the local cache if necessary
-        if (CharacterContent.characterMap[character.id] == null)
-            CharacterContent.characterMap[character.id] = character
+        synchronized(CharacterContent) {
+            if (CharacterContent.characterMap[character.id] == null) {
+                CharacterContent.characterMap[character.id] = character
+                CharacterContent.characters = CharacterContent.characterMap.map { it.value }.toMutableList()
+            }
+        }
         val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
         saveJobs[character.id] = job
         return job
