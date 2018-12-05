@@ -35,11 +35,11 @@ object CharacterRepository {
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
      */
     fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): Map<String, Character> {
-        return mapOf("test" to Character().apply {
+        return mapOf("test" to Character(id = "test").apply {
             name = "Test Name"
             race = "Test Race"
             cClass = "Test Class"
-        }, "otherTest" to Character().apply {
+        }, "otherTest" to Character(id = "otherTest").apply {
             name = "Other Test Name"
             race = "Test Race"
             cClass = "Test Class"

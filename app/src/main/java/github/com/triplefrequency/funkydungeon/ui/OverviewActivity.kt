@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -76,7 +75,6 @@ class OverviewActivity : AppCompatActivity() {
         }
         btnSkills.setOnClickListener {}
         btnAttacks.setOnClickListener {}
-        //TODO Need to have a way to dynamically change values from storage
 
     }
 
@@ -114,10 +112,8 @@ private fun <T> EditText.newOnTextChanged(lam: (T?) -> Unit, validate: ((CharSeq
                 if (error == null) {
                     this@newOnTextChanged.error = null
                     this@newOnTextChanged.clearFocus()
-                    Log.i("Test", "Saving input: $value")
                     lam(value)
                 } else {
-                    Log.w("Test", "Invalid input detected: $p0")
                     this@newOnTextChanged.error = error
                 }
             }
@@ -129,5 +125,3 @@ private fun <T> EditText.newOnTextChanged(lam: (T?) -> Unit, validate: ((CharSeq
         }
     )
 }
-
-private fun EditText.newOnTextChanged(lam: (CharSequence?) -> Unit) = this.newOnTextChanged(lam, null)

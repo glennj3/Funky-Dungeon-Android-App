@@ -23,6 +23,7 @@ public class Attributes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.pm_attributes_layout);
         Intent attrIntent = getIntent();
         if (attrIntent != null) {
             String id = attrIntent.getStringExtra(Constants.ARG_CHARACTER_ID);
