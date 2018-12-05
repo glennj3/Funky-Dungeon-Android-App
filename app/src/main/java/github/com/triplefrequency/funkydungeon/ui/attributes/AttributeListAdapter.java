@@ -1,12 +1,11 @@
 package github.com.triplefrequency.funkydungeon.ui.attributes;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,22 +15,23 @@ import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
 import github.com.triplefrequency.funkydungeon.model.Character;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAdapter.AttributeViewHolder>  {
+public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdapter.AttributeViewHolder> {
 
     private LayoutInflater mInflater;
     private final Map<String, Integer> mAttrMap;
-    private final Object[]  attrStrings;
+    private final List<Map.Entry<String, Integer>> mAttrList;
     private Character character;
 
-    public AttributeListAdapter(Context context, Map attrMap, Character charac) {
+    public AttributeListAdapter(Context context, Map<String, Integer> attrMap, List<Map.Entry<String, Integer>> attrList, Character charac) {
         mInflater = LayoutInflater.from(context);
         character = charac;
         this.mAttrMap = attrMap;
-        attrStrings = attrMap.keySet().toArray();
+        this.mAttrList = attrList;
     }
+
     @NonNull
     @Override
     public AttributeListAdapter.AttributeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -41,14 +41,14 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
 
     @Override
     public void onBindViewHolder(@NonNull AttributeListAdapter.AttributeViewHolder attrViewHolder, int position) {
-        String mCurrent = (String) attrStrings[position];
-        attrViewHolder.attrStringView.setText(mCurrent);
-        attrViewHolder.attrIntView.setText(mAttrMap.get(mCurrent));
+        Map.Entry<String, Integer> entry = mAttrList.get(position);
+        attrViewHolder.attrStringView.setText(entry.getKey());
+        attrViewHolder.attrIntView.setText(String.valueOf(entry.getValue()));
     }
 
     @Override
     public int getItemCount() {
-        return mAttrMap.size();
+        return mAttrList.size();
     }
 
     class AttributeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -68,11 +68,11 @@ public class AttributeListAdapter  extends RecyclerView.Adapter<AttributeListAda
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
             // Use that to access the affected item in attrStrings.
-            String key = (String) attrStrings[mPosition];
+            Map.Entry<String, Integer> entry = mAttrList.get(mPosition);
             //Get the corresponding key and bundle both
-            int value = mAttrMap.get(key);
+            int value = entry.getValue();
             Bundle bundle = new Bundle();
-            bundle.putInt("Attribute",value);
+            bundle.putInt("Attribute", value);
             String id = character.getId();
             bundle.putString("id", id);
 
