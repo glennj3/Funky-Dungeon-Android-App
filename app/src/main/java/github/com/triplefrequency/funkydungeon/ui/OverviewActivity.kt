@@ -70,7 +70,7 @@ class OverviewActivity : CharacterActivity() {
             return true
         } else if (id == R.id.character_delete) {
 
-            Toast.makeText(this@OverviewActivity, "Its Gone!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@OverviewActivity, "He's dead Jim.", Toast.LENGTH_SHORT).show()
 
             CharacterContent.characterMap.remove(character.id)
             CharacterRepository.delete(character.id)
