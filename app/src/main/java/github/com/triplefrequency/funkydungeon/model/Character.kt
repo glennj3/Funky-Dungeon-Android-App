@@ -54,6 +54,37 @@ class Character(
 
     override fun toString() = name
 
+    fun update(char: DatabaseCharacter) {
+        authorUid = char.authorUid
+        name = char.name
+        defensePoints = char.defensePoints
+        hitPoints = char.hitPoints
+        initiative = char.initiative
+        proficiency = char.proficiency
+        speed = char.speed
+        race = char.race
+        awareness = char.awareness
+        level = char.level
+        cClass = char.cClass
+        hitDice = char.hitDice
+        xp = char.xp
+        synchronized(attributes) {
+            for (i in 0 until attributes.size) {
+                val attr = attributes[i]
+                val oAttr = char.attributes[attr.first] ?: attr.second
+                attributes[i] = attr.first to oAttr
+            }
+        }
+        synchronized(proficiencies) {
+            proficiencies.clear()
+            proficiencies.addAll(char.proficiencies)
+        }
+        synchronized(attacks) {
+            attacks.clear()
+            attacks.addAll(char.attacks)
+        }
+    }
+
     companion object {
         fun fromDatabase(char: DatabaseCharacter?) = char?.run { Character(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes.map { (atr, v) -> atr to v }, proficiencies, attacks) }
     }

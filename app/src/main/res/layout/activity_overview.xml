@@ -1,67 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.OverviewActivity" >
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical"
+              tools:context=".ui.OverviewActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
     </android.support.design.widget.AppBarLayout>
 
     <EditText
-        android:id="@+id/name_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:hint="Name"
-        android:inputType="text"
-        android:text="Name"
-        tools:ignore="Autofill" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
+            android:id="@+id/name_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="5dp">
+            android:gravity="center_horizontal"
+            android:hint="Name"
+            android:inputType="text"
+            android:text="Name"
+            tools:ignore="Autofill"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
 
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:background="@color/colorPrimary"
                     android:orientation="horizontal"
-                    android:layout_margin="20dp"
-                    >
+                    android:layout_margin="5dp"
+            >
 
                 <TextView
                         android:id="@+id/line"
                         style="?android:attr/listSeparatorTextViewStyle"
-                        android:paddingTop="5dip"
+                        android:paddingTop="5dp"
                         android:gravity="center_horizontal"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
 
                 <TextView
                         android:id="@+id/def_text"
@@ -78,12 +75,10 @@
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
-                        android:paddingTop="5dip"
+                        android:paddingEnd="20dp"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"/>
                 <TextView
                         android:id="@+id/hp_text"
                         android:layout_width="wrap_content"
@@ -101,252 +96,225 @@
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_horizontal"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
 
                 <TextView
-                    android:id="@+id/init_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Init:" />
+                        android:id="@+id/init_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Init:"/>
 
                 <EditText
-                    android:id="@+id/init_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/init_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
                 <TextView
-                    android:id="@+id/prof_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prof:" />
+                        android:id="@+id/prof_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prof:"/>
 
                 <EditText
-                    android:id="@+id/prof_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/prof_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
                 <TextView
-                    android:id="@+id/sp_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Spd:" />
+                        android:id="@+id/sp_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Spd:"/>
 
                 <EditText
-                    android:id="@+id/speed_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberSigned"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/speed_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberSigned"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:background="@color/colorPrimary"
-                android:layout_margin="20dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
-                        android:paddingTop="5dip"
+                        android:paddingTop="5dp"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
 
                 <TextView
-                    android:id="@+id/race_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Race:" />
+                        android:id="@+id/race_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Race:"/>
 
                 <EditText
-                    android:id="@+id/race_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/race_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"/>
                 <TextView
-                    android:id="@+id/aware_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aware:" />
+                        android:id="@+id/aware_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aware:"/>
 
                 <EditText
-                    android:id="@+id/aware_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/aware_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_height="match_parent"/>
                 <TextView
-                    android:id="@+id/lvl_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Level:" />
+                        android:id="@+id/lvl_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Level:"/>
 
                 <EditText
-                    android:id="@+id/lvl_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/lvl_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
 
                 <TextView
-                    android:id="@+id/class_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Class:" />
+                        android:id="@+id/class_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class:"/>
 
                 <EditText
-                    android:id="@+id/class_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/class_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
                         android:paddingTop="5dip"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="#000" />
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"/>
 
                 <TextView
-                    android:id="@+id/hit_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="Hit:" />
+                        android:id="@+id/hit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="Hit:"/>
 
                 <EditText
-                    android:id="@+id/hit_dice_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="@string/edit_default" />
+                        android:id="@+id/hit_dice_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="@string/edit_default"/>
 
                 <TextView
                         style="?android:attr/listSeparatorTextViewStyle"
-                        android:paddingTop="5dip"
+                        android:paddingTop="5dp"
                         android:gravity="center_vertical"
-                        android:layout_below="@+id/connect_help"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#000"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"/>
             </LinearLayout>
 
             <EditText
-                android:id="@+id/xp_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:hint="Experience"
-                android:inputType="text"
-                android:text="0" />
+                    android:id="@+id/xp_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:hint="Experience"
+                    android:inputType="text"
+                    android:text="0"/>
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/toolbar_bottom" />
+    <include layout="@layout/toolbar_bottom"/>
 
 </LinearLayout>
