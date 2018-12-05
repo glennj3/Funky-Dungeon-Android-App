@@ -7,7 +7,7 @@
     android:padding="6dp">
 
     <TextView
-        android:id="@+id/word"
+        android:id="@+id/prof_item"
         style="@style/proficiency_item" />
 
 </LinearLayout>
