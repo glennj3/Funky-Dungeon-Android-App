@@ -77,7 +77,6 @@ class OverviewActivity : AppCompatActivity() {
 
         btnOverview.isEnabled = false
         btnAttributes.setOnClickListener {
-            //intent.putExtra()
             startActivity(Intent(this, Attributes::class.java).apply {
                 putExtra(Constants.ARG_CHARACTER_ID, character.id)
             })
@@ -102,6 +101,7 @@ class OverviewActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             return true
         } else if (id == R.id.action_favorite) {
+            //TODO see if there's a use for buttons
             Toast.makeText(this@OverviewActivity, "Its Save!", Toast.LENGTH_SHORT).show()
             return true
         }
