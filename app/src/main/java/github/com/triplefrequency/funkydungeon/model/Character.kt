@@ -22,7 +22,14 @@ class Character(
     cClass: String = "",
     hitDice: String = "1d8",
     xp: Int = 0,
-    attributes: List<Pair<String, Int>> = listOf("Strength", "Constitution", "Dexterity", "Intelligence", "Wisdom", "Charisma").map { it to 0 },
+    attributes: List<Pair<String, Int>> = listOf(
+        "Strength",
+        "Constitution",
+        "Dexterity",
+        "Intelligence",
+        "Wisdom",
+        "Charisma"
+    ).map { it to 0 },
     proficiencies: List<String>? = null,
     attacks: List<CharacterWeapon>? = null
 ) : ICharacter {
@@ -85,7 +92,37 @@ class Character(
         }
     }
 
+    val isValid
+        get() = name.isNotBlank() && defensePoints >= 0 && hitPoints >= 0 &&
+                initiative >= 0 && proficiency >= 0 && speed >= 0 && race.isNotBlank() && awareness >= 0 && level >= 1 && cClass.isNotBlank() &&
+                hitDice.toLowerCase().matches(Regex("^\\dd(4|6|8|10|12|20)$")) && xp >= 0 && attributes.size == 6 && attributes.all { it.second >= 0 } &&
+                proficiencies.all { it.isNotBlank() } && attacks.all {
+            it.name.isNotBlank() && it.damageDice.toLowerCase().matches(
+                Regex("^\\dd(4|6|8|10|12|20)$")
+            ) && it.attribute.isNotBlank()
+        }
+
     companion object {
-        fun fromDatabase(char: DatabaseCharacter?) = char?.run { Character(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes.map { (atr, v) -> atr to v }, proficiencies, attacks) }
+        fun fromDatabase(char: DatabaseCharacter?) = char?.run {
+            Character(
+                authorUid,
+                id,
+                name,
+                defensePoints,
+                hitPoints,
+                initiative,
+                proficiency,
+                speed,
+                race,
+                awareness,
+                level,
+                cClass,
+                hitDice,
+                xp,
+                attributes.map { (atr, v) -> atr to v },
+                proficiencies,
+                attacks
+            )
+        }
     }
 }

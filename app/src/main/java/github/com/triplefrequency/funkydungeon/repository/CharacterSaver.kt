@@ -13,8 +13,10 @@ class CharacterSaver(
      * Save the given [Character] to the default Firestore [db]
      */
     fun save(character: Character) {
-        synchronized(db) {
-            db.characterCollection.saveCharacter(character)
+        if (character.isValid) {
+            synchronized(db) {
+                db.characterCollection.saveCharacter(character)
+            }
         }
     }
 

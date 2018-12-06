@@ -5,6 +5,7 @@ import android.content.Intent
 import android.databinding.ObservableMap
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
@@ -15,6 +16,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import github.com.triplefrequency.funkydungeon.R
+import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.Character
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
@@ -42,6 +44,16 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.commit()
         }
         setSupportActionBar(toolbar)
+
+        (characterListConstraint as SwipeRefreshLayout).apply {
+            setOnRefreshListener {
+                CharacterContent.updateCache()
+                    .invokeOnCompletion {
+                        characterRecyclerView.adapter.notifyDataSetChanged()
+                        this.isRefreshing = false
+                    }
+            }
+        }
 
         floatingActionButton.setOnClickListener {
             // Don't pass a character ID, the overview activity will automatically create a new character.
@@ -102,7 +114,6 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
-
             if (resultCode == Activity.RESULT_OK) {
                 FirebaseFirestore.getInstance().enableNetwork().addOnCompleteListener {
                     val user = FirebaseAuth.getInstance().currentUser!!
@@ -113,6 +124,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Failed to Log In", Toast.LENGTH_SHORT).show()
             }
+        } else if (requestCode == RC_CHAR_UPDATE) {
+            val index = CharacterContent.characters.indexOf(CharacterContent.characterMap[data?.getStringExtra(Constants.ARG_CHARACTER_ID)])
+            characterRecyclerView.adapter.notifyItemChanged(index)
         }
     }
 
@@ -128,5 +142,6 @@ class MainActivity : AppCompatActivity() {
             )
 
         private const val RC_SIGN_IN = 889
+        private const val RC_CHAR_UPDATE = 890
     }
 }

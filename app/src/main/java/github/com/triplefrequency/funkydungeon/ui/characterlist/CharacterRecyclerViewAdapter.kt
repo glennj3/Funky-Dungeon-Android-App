@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import github.com.triplefrequency.funkydungeon.R
 import github.com.triplefrequency.funkydungeon.core.Constants.ARG_CHARACTER_ID
@@ -62,6 +63,10 @@ class CharacterRecyclerViewAdapter(
         val item = content.characters[position]
         holder.contentView.text = item.name
 
+        if (!item.isValid) {
+            holder.errorIcon.setImageResource(R.drawable.ic_error_outline)
+        }
+
         with(holder.itemView) {
             tag = item
             setOnClickListener(onClickListener)
@@ -70,5 +75,6 @@ class CharacterRecyclerViewAdapter(
 
     inner class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val contentView: TextView = view.characterName
+        val errorIcon: ImageView = view.errorIcon
     }
 }
