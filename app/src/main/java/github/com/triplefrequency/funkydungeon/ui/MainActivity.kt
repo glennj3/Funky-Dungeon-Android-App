@@ -142,6 +142,6 @@ class MainActivity : AppCompatActivity() {
             )
 
         private const val RC_SIGN_IN = 889
-        private const val RC_CHAR_UPDATE = 890
+        const val RC_CHAR_UPDATE = 890
     }
 }

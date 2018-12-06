@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import github.com.triplefrequency.funkydungeon.R
+import github.com.triplefrequency.funkydungeon.core.Constants
 import github.com.triplefrequency.funkydungeon.model.CharacterContent
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository
 import kotlinx.android.synthetic.main.activity_overview.*
@@ -81,6 +82,12 @@ class OverviewActivity : CharacterActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        setResult(MainActivity.RC_CHAR_UPDATE, Intent().apply { putExtra(Constants.ARG_CHARACTER_ID, character.id) })
+        finish()
     }
 
     private fun notBlank(sequence: CharSequence?) =
