@@ -7,6 +7,7 @@
     tools:context=".ui.proficiency.ProficiencyActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -26,15 +27,20 @@
         android:id="@+id/prof_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
         android:clickable="true"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_character_add" />
 
-    <include layout="@layout/toolbar_bottom" />
+    <include layout="@layout/toolbar_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+
+        />
 
 </android.support.design.widget.CoordinatorLayout>
