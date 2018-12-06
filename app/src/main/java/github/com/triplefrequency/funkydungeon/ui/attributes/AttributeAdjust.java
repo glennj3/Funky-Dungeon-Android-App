@@ -1,6 +1,7 @@
 package github.com.triplefrequency.funkydungeon.ui.attributes;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,15 +11,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import github.com.triplefrequency.funkydungeon.R;
 import github.com.triplefrequency.funkydungeon.model.Character;
+import github.com.triplefrequency.funkydungeon.model.CharacterContent;
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
+import kotlin.Pair;
 
 public class AttributeAdjust extends Fragment {
 
+    private Button accButton;
     private Button incButton;
     private Button decButton;
     private TextView attrLevel;
-    private int attrInt;
+    private Integer attrInt;
+    private String attrString;
     private Character character;
+    private int index;
 
     public AttributeAdjust() {
     }
@@ -36,9 +42,7 @@ public class AttributeAdjust extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        attrInt = getArguments().getInt("Attribute");
-        String charId = getArguments().getString("id");
-        character = CharacterRepository.INSTANCE.getCharacters().get(charId);
+
         /*
          * Inflate the layout for this fragment
          */
@@ -48,19 +52,31 @@ public class AttributeAdjust extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        index = getArguments().getInt("Index");
+
+        String charId = getArguments().getString("id");
+        character = CharacterContent.INSTANCE.getCharacterMap().get(charId);
+        attrString = character.getAttributes().get(index).component1();
+        attrInt = character.getAttributes().get(index).component2();
+
         incButton = view.findViewById(R.id.increment);
         decButton = view.findViewById(R.id.decrement);
-        attrLevel = view.findViewById(R.id.attrCount);
+        attrLevel = view.findViewById(R.id.attrAdj);
+        accButton = view.findViewById(R.id.accept);
 
-        attrLevel.setText(attrInt);
+        if(attrInt == null)
+            attrLevel.setText("0");
+        else
+            attrLevel.setText(attrInt.toString());
 
         incButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int current = Integer.parseInt(attrLevel.getText().toString());
-                attrLevel.setText(current+1);
+                attrInt = current + 1;
+                attrLevel.setText(attrInt.toString());
                 //change attribute in database
-
+                character.getAttributes().set(index, new Pair<>(attrString, attrInt));
             }
         });
 
@@ -68,14 +84,17 @@ public class AttributeAdjust extends Fragment {
             @Override
             public void onClick(View v) {
                 int current = Integer.parseInt(attrLevel.getText().toString());
-                attrLevel.setText(current-1);
+                attrInt = current - 1;
+                attrLevel.setText(attrInt.toString());
                 //change attribute in database
+                character.getAttributes().set(index, new Pair<>(attrString, attrInt));
             }
         });
-    }
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-
+        accButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                getActivity().getFragmentManager().popBackStack();
+            }
+        });
     }
 }

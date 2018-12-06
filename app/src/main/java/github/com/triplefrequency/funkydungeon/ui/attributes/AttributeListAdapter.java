@@ -60,18 +60,19 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             attrStringView = itemView.findViewById(R.id.attribute);
             attrIntView = itemView.findViewById(R.id.attrCount);
             this.mAdapter = adapter;
+            itemView.setOnClickListener(this);
+
         }
 
         @Override
         public void onClick(View v) {
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
-            // Use that to access the affected item in attrStrings.
-            Pair<String, Integer> entry = mAttrList.get(mPosition);
-            //Get the corresponding key and bundle both
-            int value = entry.getSecond();
+
+            //Add index and id of char to bundle
             Bundle bundle = new Bundle();
-            bundle.putInt("Attribute", value);
+            bundle.putInt("Index",mPosition);
+
             String id = character.getId();
             bundle.putString("id", id);
 
@@ -85,11 +86,8 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-            // Change the word in the mWordList.
-            //mWordList.set(mPosition, "Clicked! " + element);
-            // Notify the adapter, that the data has changed so it can
-            // update the RecyclerView to display the data.
             mAdapter.notifyDataSetChanged();
         }
+
     }
 }
