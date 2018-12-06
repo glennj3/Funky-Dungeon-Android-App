@@ -10,9 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import github.com.triplefrequency.funkydungeon.R;
 import github.com.triplefrequency.funkydungeon.model.Character;
+import github.com.triplefrequency.funkydungeon.model.CharacterContent;
 import github.com.triplefrequency.funkydungeon.model.CharacterWeapon;
 import github.com.triplefrequency.funkydungeon.repository.CharacterRepository;
 
@@ -20,22 +23,24 @@ public class AttackFragment extends Fragment {
 
     private EditText attackText;
     private EditText attackAttribute;
+    private Button attackAccept;
     private Character character;
     private String attackString;
     private String attributeString;
 
-    private OnFragmentInteractionListener mListener;
+    //private OnFragmentInteractionListener mListener;
 
     public AttackFragment() {
         // Required empty public constructor
     }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+    public void onActivityCreated( Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -43,27 +48,9 @@ public class AttackFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         String charId = getArguments().getString("id");
-        character = CharacterRepository.INSTANCE.getCharacters().get(charId);
+        character = CharacterContent.INSTANCE.getCharacterMap().get(charId);
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_attack, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -71,42 +58,29 @@ public class AttackFragment extends Fragment {
 
         attackText = view.findViewById(R.id.attackEditText);
         attackAttribute = view.findViewById(R.id.attackAttribute);
+        attackAccept = view.findViewById(R.id.attackAccept);
 
-            attackText.addTextChangedListener(new TextWatcher() {
-
-                public void afterTextChanged(Editable s) {
-
-                    attackString = attackText.getText().toString();
-                    //Return string to attack activity
-
-                    attributeString = attackAttribute.getText().toString();
-
-                    if (attributeString != null) {
-
-                        CharacterWeapon attack = new CharacterWeapon(character, attackString, "null");
-                        character.getAttacks().add(attack);
-
-                    }
-
-                    CharacterWeapon attack = new CharacterWeapon(character, attackString, "null");
-                    character.getAttacks().add(attack);
+        attackAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attackString = attackText.getText().toString();
+                attributeString = attackText.getText().toString();
+                if(attackString == null || attackString == null){
+                    Toast.makeText(getActivity(), "All fields must be filled out",Toast.LENGTH_SHORT).show();
                 }
-
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });
-
+                else{
+                    CharacterWeapon attack = new CharacterWeapon(character, attackString, attributeString);
+                    character.getAttacks().add(attack);
+                    getActivity().getFragmentManager().popBackStack();
+                }
             }
+        });
+    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

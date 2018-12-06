@@ -57,6 +57,6 @@
         android:tint="@android:color/white" />
 
     <!-- //Buttons at the bottom -->
-    <include layout="@layout/toolbar_bottom"/>
+    <include layout="@layout/toolbar_bottom" />
 
 </LinearLayout>

@@ -31,6 +31,7 @@ public class AttackActivity extends CharacterActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.attack_layout);
         findViewById(R.id.btn_attacks).setEnabled(false);
+
         FloatingActionButton addAttack = findViewById(R.id.addAttack);
 
         // Get a handle to the RecyclerView.
@@ -46,10 +47,15 @@ public class AttackActivity extends CharacterActivity {
             @Override
             public void onClick(View v) {
                 //Create fragment and add bundle
+                Bundle bundle = new Bundle();
+
+                String id = getCharacter().getId();
+                bundle.putString("id", id);
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 FragmentManager fragmentManager = activity.getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment attackFragment = new AttackFragment();
+                attackFragment.setArguments(bundle);
                 fragmentTransaction.replace(android.R.id.content, attackFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

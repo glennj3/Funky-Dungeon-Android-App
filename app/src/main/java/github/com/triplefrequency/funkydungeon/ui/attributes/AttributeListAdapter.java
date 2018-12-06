@@ -28,7 +28,7 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
     public AttributeListAdapter(Context context, Character charac) {
         mInflater = LayoutInflater.from(context);
         character = charac;
-        this.mAttrList = charac.getAttributes();
+        this.mAttrList = character.getAttributes();
     }
 
     @NonNull
@@ -40,7 +40,7 @@ public class AttributeListAdapter extends RecyclerView.Adapter<AttributeListAdap
 
     @Override
     public void onBindViewHolder(@NonNull AttributeListAdapter.AttributeViewHolder attrViewHolder, int position) {
-        Pair<String, Integer> entry = mAttrList.get(position);
+        Pair<String, Integer> entry = character.getAttributes().get(position);
         attrViewHolder.attrStringView.setText(entry.getFirst());
         attrViewHolder.attrIntView.setText(String.valueOf(entry.getSecond()));
     }
