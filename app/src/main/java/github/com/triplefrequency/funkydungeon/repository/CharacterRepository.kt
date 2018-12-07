@@ -36,18 +36,7 @@ object CharacterRepository {
     /**
      * Return of [Map] of Strings/Characters. The string is simply a string ID, generated using the [java.util.UUID.randomUUID] function.
      */
-    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser): ObservableMap<String, Character> {
-        return characterLoader.load(user)
-        /*mapOf("test" to Character(id = "test").apply {
-            name = "Test Name"
-            race = "Test Race"
-            cClass = "Test Class"
-        }, "otherTest" to Character(id = "otherTest").apply {
-            name = "Other Test Name"
-            race = "Test Race"
-            cClass = "Test Class"
-        })*/
-    }
+    fun characters(user: FirebaseUser? = FirebaseAuth.getInstance().currentUser) = characterLoader.load(user)
 
     /**
      * Return an existing lazy save [Deferred] task or create a new one.
@@ -69,10 +58,6 @@ object CharacterRepository {
                 CharacterContent.characters = CharacterContent.characterMap.map { it.value }.toMutableList()
             }
         }
-        /*return GlobalScope.async {
-            characterSaver.save(character)
-            processPostSave(character)
-        }*/
         val job = saveDispatcher.dispatch(character, characterSaver::save, this::processPostSave)
         saveJobs[character.id] = job
         return job
