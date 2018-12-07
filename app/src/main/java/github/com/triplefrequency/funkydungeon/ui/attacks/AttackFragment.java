@@ -69,7 +69,7 @@ public class AttackFragment extends Fragment {
                     Toast.makeText(getActivity(), "All fields must be filled out",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    CharacterWeapon attack = new CharacterWeapon(character, attackString, attributeString);
+                    CharacterWeapon attack = new CharacterWeapon(character, attackString, attributeString, "1d8");
                     character.getAttacks().add(attack);
                     getActivity().getFragmentManager().popBackStack();
                 }

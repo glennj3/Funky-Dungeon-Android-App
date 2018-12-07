@@ -19,9 +19,9 @@ data class DatabaseCharacter(
     var xp: Int = 0,
     var attributes: Map<String, Int> = mapOf(),
     var proficiencies: List<String> = listOf(),
-    var attacks: List<CharacterWeapon> = listOf()
+    var attacks: List<DatabaseCharacterWeapon> = listOf()
 ) {
     companion object {
-        fun fromCharacter(character: Character) = character.run { DatabaseCharacter(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes.toMap(), proficiencies, attacks) }
+        fun fromCharacter(character: Character) = character.run { DatabaseCharacter(authorUid, id, name, defensePoints, hitPoints, initiative, proficiency, speed, race, awareness, level, cClass, hitDice, xp, attributes.toMap(), proficiencies, attacks.map { DatabaseCharacterWeapon(it.name, it.attribute, it.damageDice) }) }
     }
 }

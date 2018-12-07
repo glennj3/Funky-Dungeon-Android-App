@@ -88,7 +88,7 @@ class Character(
         }
         synchronized(attacks) {
             attacks.clear()
-            attacks.addAll(char.attacks)
+            attacks.addAll(char.attacks.map { CharacterWeapon.fromDb(this, it) })
         }
     }
 
@@ -104,7 +104,7 @@ class Character(
 
     companion object {
         fun fromDatabase(char: DatabaseCharacter?) = char?.run {
-            Character(
+            val c = Character(
                 authorUid,
                 id,
                 name,
@@ -120,9 +120,10 @@ class Character(
                 hitDice,
                 xp,
                 attributes.map { (atr, v) -> atr to v },
-                proficiencies,
-                attacks
+                proficiencies
             )
+            c.attacks = c.savableList(attacks.map { CharacterWeapon.fromDb(c, it) })
+            return@run c
         }
     }
 }
