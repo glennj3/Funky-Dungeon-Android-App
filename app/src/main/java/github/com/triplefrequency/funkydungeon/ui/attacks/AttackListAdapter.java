@@ -26,7 +26,7 @@ public class AttackListAdapter extends RecyclerView.Adapter<AttackListAdapter.At
     @NonNull
     @Override
     public AttackListAdapter.AttackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View mAttackView = mInflater.inflate(R.layout.fragment_attack, parent, false);
+        View mAttackView = mInflater.inflate(R.layout.attack_list_item, parent, false);
 
         return new AttackListAdapter.AttackViewHolder(mAttackView, this);
     }
@@ -34,11 +34,9 @@ public class AttackListAdapter extends RecyclerView.Adapter<AttackListAdapter.At
     @Override
     public void onBindViewHolder(@NonNull AttackListAdapter.AttackViewHolder attackViewHolder, int position) {
         if(character.getAttacks().size() != 0) {
-            String mCurrent = character.getAttacks().get(position).getName();
-            if(mCurrent == null)
-                attackViewHolder.attackStringView.setText("Shit didnt work");
-            else
-                attackViewHolder.attackStringView.setText(mCurrent);
+            CharacterWeapon weapon = character.getAttacks().get(position);
+            if(weapon != null && attackViewHolder.attackStringView != null)
+                attackViewHolder.attackStringView.setText(weapon.getName());
         }
     }
 
